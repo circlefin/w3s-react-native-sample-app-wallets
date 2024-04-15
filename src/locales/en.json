@@ -1,0 +1,23 @@
+{
+  "main_title": "Programmable Wallet SDK Sample App",
+  "endpoint_title": "Endpoint",
+  "appid_title": "App ID",
+  "user_token_title": "User Token",
+  "encryption_title": "Encryption Key",
+  "biometrics_title": "Biometrics",
+  "challenge_id_title": "Challenge ID",
+  "challenge_type_title": "Challenge Type",
+  "result_status_title": "Result Status",
+  "signature_title": "Signature",
+  "warning_type_title": "Warning Type",
+  "warning_message_title": "Warning Message",
+  "error_code_title": "Error Code",
+  "error_message_title": "Error Message",
+  "forgot_pin": "Forgot PIN",
+  "execute_bt": "Execute",
+  "set_biometrics_pin_bt": "Set Biometrics Pin",
+  "continue_bt": "Continue",
+  "version": "Version",
+  "sdk_version": "SDK Version",
+  "e": ""
+}
