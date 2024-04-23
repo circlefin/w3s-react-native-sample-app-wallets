@@ -96,6 +96,10 @@ pod install
 3. (Optional) Open the project in [Xcode](https://apps.apple.com/tw/app/xcode/id497799835?mt=12) and build to see if there's any build error.
     - Open `W3sSampleWallet.xcworkspace` in Xcode.
     - Product ➜ Build.
+    - If the Metro server does not launch by Xcode, please run the command on project folder.
+      ```sh
+      yarn start
+      ```
 4. Run on device  
     You can simply run the command below or find more detail on [reactnative.dev](https://reactnative.dev/docs/running-on-device?package-manager=yarn&platform=android).
       - Android
