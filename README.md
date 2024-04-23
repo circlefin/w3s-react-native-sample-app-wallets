@@ -35,14 +35,9 @@ Create a Personal Access Token (PAT) in your [GitHub setting](https://github.com
 - [Creating a personal access token (classic)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic)
     
 
-Next, add `.npmrc` file as below:
-```properties
-@circlefin:registry=https://npm.pkg.github.com
-//npm.pkg.github.com/:_authToken=<GITHUB_PAT>
-```
 ## Installation
 ```shell
-yarn add @circlefin/w3s-pw-react-native-sdk
+yarn add @circle-fin/w3s-pw-react-native-sdk
 ```
 ### Android
 Add the maven repository to your `android/build.gradle`. It's suggested that load settings from the `local.properties`:

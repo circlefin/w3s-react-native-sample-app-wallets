@@ -17,7 +17,7 @@
 import * as React from "react"
 
 import { Platform, SafeAreaView, ScrollView, StyleSheet, Switch, Text, View } from "react-native"
-import { WalletSdk } from "@circlefin/w3s-pw-react-native-sdk"
+import { WalletSdk } from "@circle-fin/w3s-pw-react-native-sdk"
 import { toast } from "../Helpers.ts"
 import { DefaultCustomizer } from "../customize/DefaultCustomizer.ts"
 import { useTranslation } from "react-i18next"
@@ -26,7 +26,7 @@ import CommonInputText from "../components/CommonInputText.tsx"
 import { MainButton } from "../components/MainButton.tsx"
 import { pw_app_id, pw_endpoint } from "../config.json"
 import { version } from "../../package.json"
-import { ExecuteEvent } from "@circlefin/w3s-pw-react-native-sdk/lib/typescript/src/types"
+import { ExecuteEvent } from "@circle-fin/w3s-pw-react-native-sdk/lib/typescript/src/types"
 // @ts-ignore
 export default function MainScreen({ navigation }: Props) {
   const { t } = useTranslation()
