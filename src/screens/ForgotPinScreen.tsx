@@ -17,7 +17,7 @@
 import * as React from "react"
 
 import { Platform, SafeAreaView, Text, View } from "react-native"
-import { WalletSdk } from "@circlefin/w3s-pw-react-native-sdk"
+import { WalletSdk } from "@circle-fin/w3s-pw-react-native-sdk"
 import { MainButton } from "../components/MainButton"
 import { useTranslation } from "react-i18next"
 import { commonStyles } from "../styles"

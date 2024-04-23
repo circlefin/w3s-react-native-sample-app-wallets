@@ -26,7 +26,7 @@ import {
   TextKey,
   TextsKey,
   WalletSdk
-} from "@circlefin/w3s-pw-react-native-sdk"
+} from "@circle-fin/w3s-pw-react-native-sdk"
 import { colors } from "../styles.ts"
 
 export const DefaultCustomizer = {
