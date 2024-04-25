@@ -87,15 +87,15 @@ const _setTextConfigsMap = () => {
   ])
   map.set(TextsKey.enterPinCodeHeadline, [
     new TextConfig("ENTER your "),
-    new TextConfig("PIN", undefined, colors.primary)
+    new TextConfig("PIN", colors.primary)
   ])
   map.set(TextsKey.securityIntroHeadline, [
     new TextConfig("Set up your "),
-    new TextConfig("Recovery Method", undefined, colors.primary)
+    new TextConfig("Recovery Method", colors.primary)
   ])
   map.set(TextsKey.newPinCodeHeadline, [
     new TextConfig("ENTER your "),
-    new TextConfig("PIN", undefined, colors.primary)
+    new TextConfig("PIN", colors.primary)
   ])
   map.set(TextsKey.securityIntroLink, [
     new TextConfig("Learn more"),
@@ -103,7 +103,7 @@ const _setTextConfigsMap = () => {
   ])
   map.set(TextsKey.recoverPinCodeHeadline, [
     new TextConfig("Recover your "),
-    new TextConfig("PIN", undefined, colors.primary)
+    new TextConfig("PIN", colors.primary)
   ])
   WalletSdk.setTextConfigsMap(map)
 }
@@ -137,7 +137,6 @@ const _setTextConfigMap = () => {
     TextKey.circlepw_recover_pincode_answer_input_placeholder,
     new TextConfig(
       "Type your answer here",
-      undefined,
       colors.placeholder,
       "Inter-Regular"
     )
