@@ -1,18 +1,18 @@
 PODS:
-  - Alamofire (5.5.0)
+  - Alamofire (5.9.0)
   - boost (1.83.0)
-  - circlefin-w3s-pw-react-native-sdk (0.0.222):
-    - CircleProgrammableWalletSDK (= 1.0.14)
+  - circlefin-w3s-pw-react-native-sdk (1.0.7):
+    - CircleProgrammableWalletSDK (= 1.0.15)
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
-  - CircleProgrammableWalletSDK (1.0.14):
-    - Alamofire (= 5.5.0)
-    - DeviceKit (= 5.1.0)
-    - IQKeyboardManagerSwift (= 6.5.11)
-    - SDWebImage (= 5.9.1)
-    - SnapKit (= 5.6.0)
-  - DeviceKit (5.1.0)
+  - CircleProgrammableWalletSDK (1.0.15):
+    - Alamofire (= 5.9.0)
+    - DeviceKit (= 5.2.0)
+    - IQKeyboardManagerSwift (= 7.0.1)
+    - SDWebImage (= 5.18.10)
+    - SnapKit (= 5.7.1)
+  - DeviceKit (5.2.0)
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.73.6)
   - FBReactNativeSpec (0.73.6):
@@ -27,7 +27,7 @@ PODS:
   - hermes-engine (0.73.6):
     - hermes-engine/Pre-built (= 0.73.6)
   - hermes-engine/Pre-built (0.73.6)
-  - IQKeyboardManagerSwift (6.5.11)
+  - IQKeyboardManagerSwift (7.0.1)
   - libevent (2.1.12)
   - RCT-Folly (2022.05.16.00):
     - boost
@@ -1073,16 +1073,16 @@ PODS:
     - glog
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
-  - SDWebImage (5.9.1):
-    - SDWebImage/Core (= 5.9.1)
-  - SDWebImage/Core (5.9.1)
-  - SnapKit (5.6.0)
+  - SDWebImage (5.18.10):
+    - SDWebImage/Core (= 5.18.10)
+  - SDWebImage/Core (5.18.10)
+  - SnapKit (5.7.1)
   - SocketRocket (0.6.1)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
   - boost (from `../node_modules/react-native/third-party-podspecs/boost.podspec`)
-  - "circlefin-w3s-pw-react-native-sdk (from `../node_modules/@circlefin/w3s-pw-react-native-sdk`)"
+  - "circlefin-w3s-pw-react-native-sdk (from `../node_modules/@circle-fin/w3s-pw-react-native-sdk`)"
   - DoubleConversion (from `../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
   - FBReactNativeSpec (from `../node_modules/react-native/React/FBReactNativeSpec`)
@@ -1139,7 +1139,7 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/circlefin/w3s-ios-sdk.git:
     - CircleProgrammableWalletSDK
-  trunk:
+  https://github.com/CocoaPods/Specs.git:
     - Alamofire
     - DeviceKit
     - fmt
@@ -1153,7 +1153,7 @@ EXTERNAL SOURCES:
   boost:
     :podspec: "../node_modules/react-native/third-party-podspecs/boost.podspec"
   circlefin-w3s-pw-react-native-sdk:
-    :path: "../node_modules/@circlefin/w3s-pw-react-native-sdk"
+    :path: "../node_modules/@circle-fin/w3s-pw-react-native-sdk"
   DoubleConversion:
     :podspec: "../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
   FBLazyVector:
@@ -1255,18 +1255,18 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
-  Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
+  Alamofire: 02b772c9910e8eba1a079227c32fbd9e46c90a24
   boost: d3f49c53809116a5d38da093a8aa78bf551aed09
-  circlefin-w3s-pw-react-native-sdk: cfebc600bbadcec6d89daa610ec13909b414bc53
-  CircleProgrammableWalletSDK: d905c39d2b0737d96c03e375bc35d996b798283a
-  DeviceKit: bcce5c26d9502e77e3a9fa5d1282877db388d922
+  circlefin-w3s-pw-react-native-sdk: 63a3cf5144a332d62ce968ade8037d862566a0fd
+  CircleProgrammableWalletSDK: 222af27d777ebacc8117c0d00104b133bc0862d3
+  DeviceKit: 4167e8ffbfaff06e346f113e0142ac18fc1b16ff
   DoubleConversion: fea03f2699887d960129cc54bba7e52542b6f953
   FBLazyVector: f64d1e2ea739b4d8f7e4740cde18089cd97fe864
   FBReactNativeSpec: 9f2b8b243131565335437dba74923a8d3015e780
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: c5d68082e772fa1c511173d6b30a9de2c05a69a2
   hermes-engine: 9cecf9953a681df7556b8cc9c74905de8f3293c0
-  IQKeyboardManagerSwift: c7955c0bdbf7b2eb29bb7daaa44e3d90f55a9a85
+  IQKeyboardManagerSwift: 7f6b1b1d1497855d2beea7f2f10ffcc6978525b1
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   RCT-Folly: 7169b2b1c44399c76a47b5deaaba715eeeb476c0
   RCTRequired: ca1d7414aba0b27efcfa2ccd37637edb1ab77d96
@@ -1311,11 +1311,11 @@ SPEC CHECKSUMS:
   React-utils: a45dd70919baff681d43a4a457e9884ef96b4581
   ReactCommon: e168ee1704806f10f47ee8c7f825b5850b18eaea
   RNScreens: a4d9ce8f68f833f4e42410140eafd88e38bba163
-  SDWebImage: a990c053fff71e388a10f3357edb0be17929c9c5
-  SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
+  SDWebImage: fc8f2d48bbfd72ef39d70e981bd24a3f3be53fec
+  SnapKit: d612e99e678a2d3b95bf60b0705ed0a35c03484a
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 805bf71192903b20fc14babe48080582fee65a80
 
-PODFILE CHECKSUM: 0772215e7ec64e85a444deafab40ba7c61684d4f
+PODFILE CHECKSUM: b385e76bd78f10eb669b6dc7296dde9e6bf9c3f6
 
 COCOAPODS: 1.15.2
