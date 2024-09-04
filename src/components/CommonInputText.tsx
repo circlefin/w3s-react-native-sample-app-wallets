@@ -17,12 +17,13 @@
 import { TextInput } from "react-native"
 import { colors, commonStyles } from "../styles.ts"
 import React from "react"
+import {TextInputProps} from "react-native/Libraries/Components/TextInput/TextInput"
 
-// @ts-ignore
-export default function CommonInputText(props) {
+export default function CommonInputText(props: TextInputProps) {
   return (
     <TextInput
       {...props}
+      multiline={true}
       selectionColor={colors.primaryCursor}
       placeholderTextColor={colors.placeholder}
       style={commonStyles.normalInputField}

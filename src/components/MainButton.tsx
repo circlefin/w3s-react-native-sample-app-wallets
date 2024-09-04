@@ -18,20 +18,30 @@ import type { TouchableOpacityProps } from "react-native"
 import { Text, TouchableOpacity } from "react-native"
 import { commonStyles } from "../styles"
 import * as React from "react"
-// @ts-ignore
+
 export const MainButton = (props: MainButtonProps) => {
-  return (
+    let normalBg = commonStyles.mainButton
+    let disabledBg = commonStyles.disabledMainButton
+    let normalText = commonStyles.mainButtonText
+    let disabledText = commonStyles.disabledMainButtonText
+    if (props.isSecondary){
+        normalBg = commonStyles.secondaryButton
+        disabledBg = commonStyles.disabledSecondaryButton
+        normalText = commonStyles.secondaryButtonText
+        disabledText = commonStyles.disabledSecondaryButtonText
+    }
+    return (
     <TouchableOpacity
       {...props}
       activeOpacity={0.7}
       style={[
-        commonStyles.mainButton,
-        props.isDisabled && commonStyles.disabledMainButton
+        normalBg,
+        props.disabled && disabledBg
       ]}>
       <Text
         style={[
-          commonStyles.mainButtonText,
-          props.isDisabled && commonStyles.disabledMainButtonText
+          normalText,
+          props.disabled && disabledText
         ]}>
         {props.text}
       </Text>
@@ -40,6 +50,7 @@ export const MainButton = (props: MainButtonProps) => {
 }
 
 interface MainButtonProps extends TouchableOpacityProps {
-  isDisabled: boolean,
-  text: string
+  disabled: boolean,
+  text: string,
+  isSecondary: boolean
 }

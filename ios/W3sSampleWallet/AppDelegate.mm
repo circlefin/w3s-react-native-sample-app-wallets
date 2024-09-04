@@ -18,6 +18,12 @@
 
 #import <React/RCTBundleURLProvider.h>
 
+// FBSDKLoginKit setups for iOS
+// Doc: https://github.com/thebergamo/react-native-fbsdk-next?tab=readme-ov-file#32-ios
+#import <AuthenticationServices/AuthenticationServices.h>
+#import <SafariServices/SafariServices.h>
+#import <FBSDKCoreKit/FBSDKCoreKit-Swift.h>
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -27,7 +33,17 @@
   // They will be passed down to the ViewController used by React Native.
   self.initialProps = @{};
 
+  [[FBSDKApplicationDelegate sharedInstance] application: application
+                           didFinishLaunchingWithOptions: launchOptions];
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
+}
+
+- (BOOL)application:(UIApplication *)app
+            openURL:(NSURL *)url
+            options:(NSDictionary<UIApplicationOpenURLOptionsKey, id> *)options {
+  return [[FBSDKApplicationDelegate sharedInstance] application:app
+                                                        openURL:url
+                                                        options:options];
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
