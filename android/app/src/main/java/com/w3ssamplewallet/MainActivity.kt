@@ -15,7 +15,7 @@
 // limitations under the License.
 //
 
-package com.w3ssamplewallet
+package com.circle.w3s.rn.sample.wallet
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate

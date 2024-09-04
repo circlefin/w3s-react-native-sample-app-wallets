@@ -17,6 +17,7 @@
 apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
+apply plugin: "com.google.gms.google-services"
 
 /**
  * This is the configuration block to customize your React Native Android app.
@@ -90,27 +91,14 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.w3ssamplewallet"
+    namespace "com.circle.w3s.rn.sample.wallet"
     defaultConfig {
-        applicationId "com.w3ssamplewallet"
+        applicationId "com.circle.w3s.rn.sample.wallet"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
-    }
-    signingConfigs {
-        debug {
-            storeFile file('debug.keystore')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
-        }
-        release {
-            storeFile file('debug.keystore')
-            storePassword 'android'
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
-        }
+        manifestPlaceholders = [appAuthRedirectScheme: 'YOUR_APPLE_SERVICE_ID']
     }
     buildTypes {
         debug {
@@ -137,5 +125,4 @@ dependencies {
         implementation jscFlavor
     }
 }
-
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
