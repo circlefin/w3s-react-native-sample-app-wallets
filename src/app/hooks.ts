@@ -14,19 +14,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { TextInput } from "react-native"
-import { colors, commonStyles } from "../styles.ts"
-import React from "react"
-import {TextInputProps} from "react-native/Libraries/Components/TextInput/TextInput"
+import { useDispatch, useSelector, useStore } from 'react-redux'
+import type { AppDispatch, AppStore, RootState } from './store'
 
-export default function CommonInputText(props: TextInputProps) {
-  return (
-    <TextInput
-      {...props}
-      multiline={true}
-      selectionColor={colors.primaryCursor}
-      placeholderTextColor={colors.placeholder}
-      style={commonStyles.normalInputField}
-    />
-  )
-}
+export const useAppDispatch = useDispatch.withTypes<AppDispatch>()
+export const useAppSelector = useSelector.withTypes<RootState>()
+export const useAppStore = useStore.withTypes<AppStore>()
