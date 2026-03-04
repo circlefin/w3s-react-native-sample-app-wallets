@@ -17,11 +17,11 @@
 import * as React from "react"
 
 import {
-    SafeAreaView,
     StyleSheet,
     Text,
     View
 } from "react-native"
+import {SafeAreaView} from "react-native-safe-area-context"
 import {useTranslation} from "react-i18next"
 import {colors, commonStyles} from "../styles"
 import {useEffect} from "react"

@@ -16,12 +16,12 @@
 
 buildscript {
     ext {
-        buildToolsVersion = "34.0.0"
-        minSdkVersion = 23
-        compileSdkVersion = 34
-        targetSdkVersion = 34
-        ndkVersion = "26.1.10909125"
-        kotlinVersion = "1.9.25"
+        buildToolsVersion = "35.0.0"  // Upgraded: Required for AGP 8.6.0+
+        minSdkVersion = 24            // Upgraded: Required for JSC intl support
+        compileSdkVersion = 35        // Upgraded: Required for AGP 8.6.0
+        targetSdkVersion = 34         // Note: Consider upgrading to 35 after testing Android 14 behaviors
+        ndkVersion = "26.1.10909125"  // Note: Can upgrade to 27.1.12297006 after testing native dependencies
+        kotlinVersion = "1.9.25"     // Note: Consider upgrading to 2.0.21 after testing (major version change)
     }
     repositories {
         google()
@@ -44,11 +44,9 @@ buildscript {
         }
     }
     dependencies {
-        classpath("com.android.tools.build:gradle")
+        classpath("com.android.tools.build:gradle:8.6.0")
         classpath("com.facebook.react:react-native-gradle-plugin")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
-        classpath 'com.android.tools.build:gradle'
-        classpath 'com.android.tools.build:gradle:8.0.2'
         classpath 'com.google.gms:google-services:4.4.2'
     }
 }
