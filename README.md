@@ -2,6 +2,28 @@
 
 > Sample app for integrating Circle Programmable Wallet React Native SDK.
 
+---
+
+## ⚠️ SDK v1 (Legacy) Branch
+
+**This branch (`sdk-v1`) is maintained for SDK v1 users.**
+
+This branch contains the sample application for **SDK v1** (`@circle-fin/w3s-pw-react-native-sdk` v1.x), which uses traditional bare React Native architecture (non-Expo).
+
+### Looking for SDK v2?
+
+**SDK v2 (v2.0.0+) is now available on the `master` branch** with significant improvements:
+- Built on Expo Modules architecture
+- Simplified native code management with `expo prebuild`
+- Better developer experience and maintainability
+- Latest features and updates
+
+**👉 To use SDK v2, please switch to the [`master` branch](https://github.com/circlefin/w3s-react-native-sample-app-wallets/tree/master).**
+
+The `master` branch includes a comprehensive migration guide for upgrading from SDK v1 to v2.
+
+---
+
 - Bookmark
   - [Requirement](#requirement)
   - [Installation](#installation)
