@@ -22,6 +22,7 @@ import TabScreen from "./screens/TabScreen"
 import {store} from './app/store'
 import { Provider } from 'react-redux'
 import ExecuteScreen from "./screens/ExecuteScreen.tsx"
+import { SafeAreaProvider } from "react-native-safe-area-context"
 
 export type RootStackParamList = {
   Main: object;
@@ -35,9 +36,10 @@ const Stack = createNativeStackNavigator<RootStackParamList>()
 export default function App() {
   return (
     <Provider store={store}>
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="Tab"
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName="Tab"
           screenOptions={{
             headerShown: false
           }}>
@@ -47,8 +49,9 @@ export default function App() {
             animationTypeForReplace: 'push',
             animation:'slide_from_bottom'
           }}/>
-        </Stack.Navigator>
-      </NavigationContainer>
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SafeAreaProvider>
     </Provider>
   )
 }

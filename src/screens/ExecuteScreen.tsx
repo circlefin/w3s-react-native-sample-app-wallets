@@ -15,7 +15,8 @@
 // limitations under the License.
 
 import * as React from "react"
-import {SafeAreaView, Text, View, ScrollView, Image, TouchableOpacity, StyleSheet} from "react-native"
+import {Text, View, ScrollView, Image, TouchableOpacity, StyleSheet} from "react-native"
+import {SafeAreaView} from "react-native-safe-area-context"
 import {colors, commonStyles} from "../styles.ts"
 import {useTranslation} from "react-i18next"
 import {MainButton} from "../components/MainButton.tsx"
