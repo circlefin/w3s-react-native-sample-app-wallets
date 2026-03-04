@@ -26,6 +26,7 @@ import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.load
 import com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost
 import com.facebook.react.defaults.DefaultReactNativeHost
 import com.facebook.soloader.SoLoader
+import com.facebook.react.soloader.OpenSourceMergedSoMapping
 
 class MainApplication : Application(), ReactApplication {
 
@@ -50,7 +51,13 @@ class MainApplication : Application(), ReactApplication {
 
   override fun onCreate() {
     super.onCreate()
-    SoLoader.init(this, false)
+    // Updated for React Native 0.79.3 + New Architecture compatibility
+    // Using OpenSourceMergedSoMapping for proper single library support:
+    // 1. Required for New Architecture (newArchEnabled=true) in RN 0.79.3
+    // 2. Enables the "single library" feature introduced in RN 0.76+
+    // 3. Merges multiple native libraries into libreactnative.so for better performance
+    // 4. Fixes "libreact_featureflagsjni.so not found" errors with New Architecture
+    SoLoader.init(this, OpenSourceMergedSoMapping)
     if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
       // If you opted-in for the New Architecture, we load the native entry point for this app.
       load()
