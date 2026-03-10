@@ -16,18 +16,9 @@
  * limitations under the License.
  */
 
-// Learn more https://docs.expo.io/guides/customizing-metro
-const { getDefaultConfig } = require('expo/metro-config')
-const path = require('path')
+import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import type { RootState, AppDispatch } from './store'
 
-const config = getDefaultConfig(__dirname)
-
-config.resolver = {
-  ...config.resolver,
-  extraNodeModules: {
-    '@features': path.resolve(__dirname, 'features'),
-    '@redux': path.resolve(__dirname, 'redux')
-  }
-}
-
-module.exports = config
+// Use throughout your app instead of plain `useDispatch` and `useSelector`
+export const useAppDispatch = () => useDispatch<AppDispatch>()
+export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector

@@ -16,18 +16,17 @@
  * limitations under the License.
  */
 
-// Learn more https://docs.expo.io/guides/customizing-metro
-const { getDefaultConfig } = require('expo/metro-config')
-const path = require('path')
+import { configureStore } from '@reduxjs/toolkit'
+import settingsReducer from '@features/settings/settingsSlice'
+import resultReducer from '@features/result/resultSlice'
 
-const config = getDefaultConfig(__dirname)
+export const store = configureStore({
+  reducer: {
+    settings: settingsReducer,
+    result: resultReducer,
+  },
+})
 
-config.resolver = {
-  ...config.resolver,
-  extraNodeModules: {
-    '@features': path.resolve(__dirname, 'features'),
-    '@redux': path.resolve(__dirname, 'redux')
-  }
-}
-
-module.exports = config
+// Infer the `RootState` and `AppDispatch` types from the store itself
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

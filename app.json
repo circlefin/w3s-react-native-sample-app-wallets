@@ -1,4 +1,65 @@
 {
-  "name": "W3sSampleWallet",
-  "displayName": "W3sSampleWallet"
+  "expo": {
+    "name": "W3sSampleWallet",
+    "slug": "W3sSampleWallet",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/image/icon.png",
+    "scheme": "w3ssamplewallet",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.circle.w3s.rn.sample.wallet"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/image/android-icon-foreground.png",
+        "backgroundImage": "./assets/image/android-icon-background.png",
+        "monochromeImage": "./assets/image/android-icon-monochrome.png"
+      },
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false,
+      "package": "com.circle.w3s.rn.sample.wallet"
+    },
+    "plugins": [
+      "expo-router",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/image/splash-icon.png",
+          "imageWidth": 200,
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff",
+          "dark": {
+            "backgroundColor": "#000000"
+          }
+        }
+      ],
+      [
+        "@circle-fin/w3s-pw-react-native-sdk/plugins/withCopyFiles",
+        {
+          "sourceDir": "prebuild-sync-src",
+          "targetDir": ".",
+          "overwrite": true
+        }
+      ],
+      "@circle-fin/w3s-pw-react-native-sdk/plugins/podfile-modifier",
+      [
+        "@circle-fin/w3s-pw-react-native-sdk/plugins/infoplist-config",
+        {
+          "facebookAppId": "YOUR_FACEBOOK_APP_ID",
+          "facebookClientToken": "YOUR_FACEBOOK_CLIENT_TOKEN",
+          "facebookDisplayName": "YOUR_FACEBOOK_DISPLAY_NAME",
+          "googleClientId": "YOUR_GOOGLE_IOS_CLIENT_ID"
+        }
+      ],
+      "@circle-fin/w3s-pw-react-native-sdk/plugins/apple-signin-entitlements"
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    }
+  }
 }

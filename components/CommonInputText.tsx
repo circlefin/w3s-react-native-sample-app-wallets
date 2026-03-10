@@ -16,18 +16,18 @@
  * limitations under the License.
  */
 
-// Learn more https://docs.expo.io/guides/customizing-metro
-const { getDefaultConfig } = require('expo/metro-config')
-const path = require('path')
+import { TextInput, TextInputProps } from "react-native"
+import { colors, commonStyles } from "../styles"
+import React from "react"
 
-const config = getDefaultConfig(__dirname)
-
-config.resolver = {
-  ...config.resolver,
-  extraNodeModules: {
-    '@features': path.resolve(__dirname, 'features'),
-    '@redux': path.resolve(__dirname, 'redux')
-  }
+export default function CommonInputText(props: TextInputProps) {
+  return (
+    <TextInput
+      {...props}
+      multiline={true}
+      selectionColor={colors.primaryCursor}
+      placeholderTextColor={colors.placeholder}
+      style={[commonStyles.normalInputField, props.style]}
+    />
+  )
 }
-
-module.exports = config
