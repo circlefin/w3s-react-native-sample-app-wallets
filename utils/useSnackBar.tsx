@@ -16,18 +16,30 @@
  * limitations under the License.
  */
 
-// Learn more https://docs.expo.io/guides/customizing-metro
-const { getDefaultConfig } = require('expo/metro-config')
-const path = require('path')
+import { useState } from 'react'
 
-const config = getDefaultConfig(__dirname)
+export type ShowSnackBarFn = (msg: string, isSuccess?: boolean) => void;
 
-config.resolver = {
-  ...config.resolver,
-  extraNodeModules: {
-    '@features': path.resolve(__dirname, 'features'),
-    '@redux': path.resolve(__dirname, 'redux')
+export const useSnackBar = () => {
+  const [visible, setVisible] = useState(false)
+  const [message, setMessage] = useState('')
+  const [isSuccess, setIsSuccess] = useState(true)
+
+  const showSnackBar = (msg: string, success: boolean = true) => {
+    setMessage(msg)
+    setIsSuccess(success)
+    setVisible(true)
+  }
+
+  const hideSnackBar = () => {
+    setVisible(false)
+  }
+
+  return {
+    visible,
+    message,
+    isSuccess,
+    showSnackBar,
+    hideSnackBar,
   }
 }
-
-module.exports = config

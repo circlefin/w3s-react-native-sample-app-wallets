@@ -1,0 +1,5 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["github>crcl-main/renovate-config"],
+  "minimumReleaseAge": "7 days"
+}

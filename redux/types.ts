@@ -16,18 +16,14 @@
  * limitations under the License.
  */
 
-// Learn more https://docs.expo.io/guides/customizing-metro
-const { getDefaultConfig } = require('expo/metro-config')
-const path = require('path')
-
-const config = getDefaultConfig(__dirname)
-
-config.resolver = {
-  ...config.resolver,
-  extraNodeModules: {
-    '@features': path.resolve(__dirname, 'features'),
-    '@redux': path.resolve(__dirname, 'redux')
-  }
+export enum AuthMode {
+  social = 'social',
+  email = 'email',
+  pin = 'pin',
 }
 
-module.exports = config
+export interface SettingsState {
+  endpoint: string;
+  appId: string;
+  enableBiometrics: boolean;
+}

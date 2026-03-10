@@ -1,159 +1,364 @@
-# Circle Programmable Wallet SDK for React Native - Sample
+# Circle User-Controlled Wallets React Native Sample App
 
-> Sample app for integrating Circle Programmable Wallet React Native SDK.
+> Expo sample app demonstrating Circle's user-controlled wallet integration using React Native SDK
 
-- Bookmark
-  - [Requirement](#requirement)
-  - [Installation](#installation)
-  - [New Architecture Support](#new-architecture-support)
-  - [Run the Sample App](#requirement)
+This sample app supports three authentication methods:
+
+<img src="readme_images/running_app_pin.png" alt="PIN Authentication" width="200"/>&nbsp;&nbsp;<img src="readme_images/running_app_email.png" alt="Email OTP Authentication" width="200"/>&nbsp;&nbsp;<img src="readme_images/running_app_social.png" alt="Social Login Authentication" width="200"/>
+
+### 1. PIN Code (Recommended for quick start)
+- **Simplest setup** - Only requires Circle App ID
+
+### 2. Email OTP
+- **Backend configuration** - Requires email service setup on Circle developer console
+- No additional client-side configuration needed
+
+### 3. Social Login (Google, Facebook, Apple)
+- **Advanced setup** - Requires OAuth provider accounts and platform-specific configuration
+- Additional setup for iOS and Android
+
 ---
 
+## Table of Contents
 
-## Requirement
+- [Requirements](#requirements)
+- [Quick Start (PIN Mode)](#quick-start-pin-mode)
+- [Email OTP Setup](#email-otp-setup)
+- [Social Login Setup](#social-login-setup)
+- [Troubleshooting](#troubleshooting)
+- [Migrating from SDK v1](#migrating-from-sdk-v1-bare-react-native)
+
+---
+
+## Requirements
+
+### Development Environment
+- Node.js 20.19.4 or higher
+- npm
+- Expo CLI
+
 ### Android
-- Java 17 is required for the sample app.
+- Java 17 (JDK 17 recommended)
+- Android Studio and Android SDK
+- Android SDK Platform 35 (Android 15 VanillaIceCream)
+- Android SDK Build-Tools 36.0.0
+- Android device or emulator (API level 35+)
+
 ### iOS
-- Xcode 14.1+    
-Install Apple’s Xcode development software: [Xcode in the Apple App Store](https://apps.apple.com/tw/app/xcode/id497799835?mt=12).
+- macOS with Xcode 16.1+ (Xcode 26 is recommended)
+- Xcode Command Line Tools
+- CocoaPods
+- iOS device (iOS 15.0+) or Simulator
+- Apple Developer account (for physical device testing)
 
-- CocoaPods    
-**CocoaPods** is a dependency manager for iOS projects. [Install CocoaPods by Homebrew](https://formulae.brew.sh/formula/cocoapods). (suggestion)    
-  > Check if Homebrew is installed:
+---
 
-  ```shell
-  $ brew
-  ```
+## Quick Start (PIN Mode)
 
-  > How to install Homebrew on MacOS: [Link](https://mac.install.guide/homebrew/3.html)
-  
-## Installation
-```shell
-yarn add @circle-fin/w3s-pw-react-native-sdk
-```
-### Android
-1. In your root-level (project-level) Gradle file (`android/build.gradle`)
-    1. Add the maven repository as below. It's suggested that load settings from the `local.properties`:
-        ```properties
-        repositories {
-            ...
-            maven {
-                    Properties properties = new Properties()
-                // Load local.properties.
-                    properties.load(new File(rootDir.absolutePath + "/local.properties").newDataInputStream())
-        
-                url properties.getProperty('pwsdk.maven.url')
-                credentials {
-                        username properties.getProperty('pwsdk.maven.username')
-                        password properties.getProperty('pwsdk.maven.password')
-                }
-            }
-        }
-        ```
-    2. Add the Google services plugin as a dependency:
-        ```
-       buildscript {
-           dependencies {
-               classpath 'com.google.gms:google-services:4.4.2'
-           }
-       }
-        ```
-2. In your module (app-level) Gradle file (`android/app/build.gradle`), add the Google services plugin:
-    ```
-    apply plugin: "com.google.gms.google-services"
-    ```
+### Prerequisites
+1. **Circle Developer Console Account** - [Sign up here](https://console.circle.com)
+2. **App ID** - Get from [Circle Developer Console](https://console.circle.com/wallets/user/configurator) → Wallets → User Controlled → Configurator
+3. **GitHub PAT** (Android only) - [Create token](https://github.com/settings/tokens) with `read:packages` permission
 
-3. Add the maven setting values in the `local.properties` file.
-    ```properties
-    pwsdk.maven.url=https://maven.pkg.github.com/circlefin/w3s-android-sdk
-    pwsdk.maven.username=<GITHUB_USERNAME>
-    pwsdk.maven.password=<GITHUB_PAT>
-    ```
-   > **Note**
-   > When pasting the values above for `<GITHUB_USERNAME>` and `<GITHUB_PAT>`, make sure to not surround the values with quotes.
+### Install and Run
 
-   - Check the following links for creating PAT.
-       - [Creating a personal access token (classic)](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-personal-access-token-classic)
-       - [Creating a fine-grained personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens#creating-a-fine-grained-personal-access-token)
-### iOS
-Run the command under `ios/`:
+**Step 1: Install dependencies**
+
+```bash
+npm install
 ```
-pod install
+
+**Step 2: Configure .env (Android only)**
+
+```bash
+cp .env.example .env
 ```
-## New Architecture Support
-The SDK is supporting both React Native old and [new architectures](https://reactnative.dev/docs/the-new-architecture/landing-page).
-You can enable or disable the new architecture by changing the project setting.
-### Android
-Set the `android/gradle.properties` file as below to enable new architecture or false to disable. 
-```properties
-newArchEnabled=true
+
+Edit `.env` and add your `PWSDK_MAVEN_USERNAME` and `PWSDK_MAVEN_PASSWORD`
+
+**Step 3: Configure App ID**
+
+Edit `src/config.json` and set your App ID:
+
+```json
+{
+  "pw_app_id": "YOUR_APP_ID"
+}
 ```
-### iOS
-Reinstall your pods by running pod install with the right flag:
-```shell
-bundle install && RCT_NEW_ARCH_ENABLED=1 bundle exec pod install
+
+**Step 4: Generate native projects**
+
+```bash
+npx expo prebuild
 ```
-Or run without flag to use old architecture:
-```sh
-pod install
+
+**Step 5: Run the app**
+
+For iOS:
+```bash
+npm run ios
 ```
-## Run the Sample App
-### Android
-1. Edit `src/config.json` ➜ `pw_app_id` to fill in your `APP ID`.
-2. Place your `google-services.json` file downloaded from Firebase to `android/app` [(LearnMore)](https://github.com/react-native-community/react-native-google-signin/blob/master/docs/get-config-file.md)
-3. **_Skip this if not using Google sign-in_**  
-    Edit `android/app/src/main/res/values/strings.xml` ➜ `YOUR_GOOGLE_WEB_CLIENT_ID` to fill in your `Google sign-in client ID`.
-4. **_Skip this if not using Facebook sign-in_**  
-    Edit `android/app/src/main/res/values/strings.xml` ➜ `YOUR_FACEBOOK_APP_ID` to fill in your `Facebook app id`.  
-    Edit `android/app/src/main/res/values/strings.xml` ➜ `YOUR_FACEBOOK_CLIENT_TOKEN` to fill in your `Facebook client token`.
-5. **_Skip this if not using Apple sign-in_**  
-    Edit `android/app/build.gradle` ➜ `YOUR_APPLE_SERVICE_ID` to fill in your `Apple service-id`.  
-6. (Optional) Open the project in [Android Studio](https://developer.android.com/studio) and see if there's any build error.
-    - File ➜ Open ➜ choose `android` folder.
-    - File ➜ Sync Project with Files.
-    - Build ➜ Rebuild Project.
-7. Run on device  
-   You can simply run the command below or find more detail on [reactnative.dev](https://reactnative.dev/docs/running-on-device?package-manager=yarn&platform=android).
-    - Android
-      ```sh
-      yarn android
-      ```
-### iOS
-1. Edit `src/config.json` ➜ `pw_app_id` to fill in your `APP ID`.
-2. Open the project in [Xcode](https://apps.apple.com/tw/app/xcode/id497799835?mt=12) and build to see if there's any build error.
-    - Open `W3sSampleWallet.xcworkspace` in Xcode.
-    - Product ➜ Build.
-    - If the Metro server does not launch by Xcode, please run the command on project folder.
-      ```sh
-      yarn start
-      ```
-3. Social login setups
-   - **_Apple sign-in (Optional)_**  
-     In the project editor, setup your own development team and Bundle Identifier.  
-     Add the Sign In with Apple capability to your target if needed.  
-      > Learn more: https://help.apple.com/xcode/mac/11.0/#/dev50571b902
+
+For Android:
+```bash
+npm run android
+```
+
+**That's it!** Open the app, go to the **PIN** tab, and start testing.
+
+> [!NOTE]
+> Want to add Email OTP or Social Login? See [Email OTP Setup](#email-otp-setup-optional) or [Social Login Setup](#social-login-setup-optional) below.
+
+---
+
+## Email OTP Setup
+
+> [!IMPORTANT]
+> **Prerequisite:** Complete the [Quick Start](#quick-start-pin-mode) setup first before adding Email OTP.
+
+### Backend Configuration
+
+Email OTP authentication requires an SMTP email service configured on your backend to send one-time passcodes to users. No additional client-side configuration is needed.
+
+Follow [our tutorial](https://developers.circle.com/wallets/user-controlled/create-user-wallets-with-email#step-1-get-mailtrap-smtp-credentials) to configure your SMTP credentials. The tutorial uses [Mailtrap](https://mailtrap.io/) for testing.
+
+The tutorial covers:
+- **Step 1:** Getting SMTP credentials from your email provider
+- **Step 2:** Configuring SMTP settings in Circle Developer Console
+
+---
+
+## Social Login Setup
+
+> [!IMPORTANT]
+> **Prerequisite:** Complete the [Quick Start](#quick-start-pin-mode) setup first before adding Social Login.
+
+Social Login requires configuration for each provider (Google, Facebook, Apple) on both iOS and Android.
+
+> [!NOTE]
+> It's not necessary to configure all providers. Follow only the sections for the providers you want to support.
+
+#### Prerequisites: Obtain Provider IDs
+
+Before configuring your app, you need to obtain IDs from each social provider.
+
+<details>
+<summary><b>Google</b></summary>
+
+**What you need:**
+- Web Client ID
+- `google-services.json` file from Firebase (for Android)
+- iOS Client ID (extracted from `GoogleService-Info.plist`)
+
+**Steps:**
+
+1. Visit [Firebase Console](https://console.firebase.google.com/) and create a Firebase project.
+
+2. Add an **Android app** to your project:
+   - Go to Project Settings → Your apps
+   - Click "Add app" → Select Android
+   - Package name: `com.circle.w3s.rn.sample.wallet`
+   - Download the `google-services.json` file
    
-   - **_Google sign-in (Optional)_**  
-    Edit `W3sSampleWallet/info.plist` ➜ `YOUR_IOS_CLIENT_ID` to fill in your `OAuth client ID`.  
-    Edit `W3sSampleWallet/info.plist/URL types/URL Schemes` ➜ `YOUR_DOT_REVERSED_IOS_CLIENT_ID` to fill in your `reversed client ID`.  
-      > Learn more: https://developers.google.com/identity/sign-in/ios/start-integrating?hl=en#add_client_id
+   For detailed Android setup steps, see [Firebase Android setup guide](https://firebase.google.com/docs/android/setup#create-firebase-project)  
+  
+3. Add an **iOS app** to your project:
+   - Go to Project Settings → Your apps
+   - Click "Add app" → Select iOS
+   - Bundle ID: `com.circle.w3s.rn.sample.wallet`
+   - Download the `GoogleService-Info.plist` file
+   - Open the file and copy the value of the `CLIENT_ID` key (this will be used in `app.json`)
 
-   - **_Facebook sign-in (Optional)_**  
-    Edit `W3sSampleWallet/info.plist/URL types/URL Schemes` ➜ `fbAPP-ID` replace with `fb{your-facebook-app-id}`.  
-    Edit `W3sSampleWallet/info.plist/FacebookAppID` ➜ `APP-ID` replace with `your-facebook-app-id`.  
-    Edit `W3sSampleWallet/info.plist/FacebookClientToken` ➜ `CLIENT-TOKEN` to fill in your `Facebook client token`.  
-    Edit `W3sSampleWallet/info.plist/FacebookDisplayName` ➜ `APP-NAME` to fill in your `App Name`.  
-      > Learn more: https://developers.facebook.com/docs/ios/getting-started#configure-your-project
+4. Enable Google Sign-In:
+   - Navigate to **Build** → **Authentication** → **Sign-in method** tab
+   - Select **Google**, enable it, and click **Save**
 
-4. Run on device  
-    You can simply run the command below or find more detail on [reactnative.dev](https://reactnative.dev/docs/running-on-device?package-manager=yarn&platform=android).
-      - iOS
-        ```sh
-        yarn ios
-        ```
-    
-### Usage
-There are three tabs corresponding to different [authentication methods](https://developers.circle.com/w3s/docs/authentication-methods). 
-    Fill in the `App ID` and the relevant fields in each tab according to the requirements of different authentication methods for challenge execution.  
+5. Get your **Web Client ID**:
+   - Open the **Google** provider again
+   - In the **Web SDK configuration** panel, copy the **Web client ID**
 
-<img src="readme_images/running_app_social.png" alt="drawing" width="200"/>&nbsp;<img src="readme_images/running_app_email.png" alt="drawing" width="200"/>&nbsp;<img src="readme_images/running_app_pin.png" alt="drawing" width="200"/>
+**Save these values:**
+```
+✓ Web Client ID: xxxxx.apps.googleusercontent.com
+✓ google-services.json: Downloaded
+✓ CLIENT_ID from GoogleService-Info.plist: xxxxx.apps.googleusercontent.com
+```
+
+</details>
+
+<details>
+<summary><b>Facebook</b></summary>
+
+**What you need:**
+- Facebook App ID
+- Facebook Client Token
+- Facebook Display Name
+
+**Steps:**
+
+1. Go to [Meta for Developers](https://developers.facebook.com/)
+2. Create a new Facebook app
+3. In app settings, add both **iOS** and **Android** platforms
+4. Note down the following values:
+   - **Facebook App ID** (in Settings → Basic)
+   - **Facebook Client Token** (in Settings → Advanced)
+   - **Facebook Display Name** (your app name)
+
+**Save these values:**
+```
+✓ Facebook App ID: xxxxxxxxxxxx
+✓ Facebook Client Token: xxxxxxxxxxxxxxxx
+✓ Facebook Display Name: Your App Name
+```
+
+</details>
+
+<details>
+<summary><b>Apple</b></summary>
+
+**What you need:**
+- Service ID (for Sign in with Apple on Android)
+
+**Steps:**
+
+1. Follow Apple's guide: [Register a Services ID](https://developer.apple.com/help/account/identifiers/register-a-services-id)
+2. Note down your **Service ID**
+
+**Save this value:**
+```
+✓ Apple Service ID: com.yourcompany.yourapp
+```
+
+</details>
+
+#### Configure Social Logins in Circle Developer Console
+
+After obtaining provider IDs, configure them in Circle Developer Console:
+
+1. Go to [Circle Developer Console → Social Logins](https://console.circle.com/wallets/user/configurator/authentication-methods/social-logins)
+2. Enter the provider IDs you obtained above
+3. Save your configuration
+
+---
+
+#### iOS Configuration
+
+This project uses Expo config plugins to automatically configure iOS settings during `expo prebuild`.
+
+**Step 1:** Update the plugin configuration in `app.json`
+
+Replace the placeholder values with your actual credentials:
+
+```json
+{
+  "expo": {
+    "plugins": [
+      "@circle-fin/w3s-pw-react-native-sdk/plugins/apple-signin-entitlements",
+      [
+        "@circle-fin/w3s-pw-react-native-sdk/plugins/infoplist-config",
+        {
+          "facebookAppId": "YOUR_FACEBOOK_APP_ID",
+          "facebookClientToken": "YOUR_FACEBOOK_CLIENT_TOKEN",
+          "facebookDisplayName": "YOUR_FACEBOOK_DISPLAY_NAME",
+          "googleClientId": "YOUR_GOOGLE_IOS_CLIENT_ID"
+        }
+      ]
+    ]
+  }
+}
+```
+
+**Step 2:** Run prebuild to apply configuration:
+
+```bash
+npx expo prebuild --clean
+```
+
+Done! The plugins will automatically configure Sign in with Apple capability and `Info.plist` settings.
+
+---
+
+#### Android Configuration
+
+<details open>
+<summary><b>Google Configuration</b></summary>
+
+**Step 1:** Add `google-services.json`
+
+Place your `google-services.json` file in `prebuild-sync-src/android/app/google-services.json`
+
+**Step 2:** Configure `strings.xml`
+
+Edit `prebuild-sync-src/android/app/src/main/res/values/strings.xml`:
+
+```xml
+<!-- Google -->
+<string name="google_web_client_id" translatable="false">YOUR_GOOGLE_WEB_CLIENT_ID</string>
+```
+
+</details>
+
+<details>
+<summary><b>Facebook Configuration</b></summary>
+
+Edit `prebuild-sync-src/android/app/src/main/res/values/strings.xml`:
+
+```xml
+<!-- Facebook -->
+<string name="facebook_app_id">YOUR_FACEBOOK_APP_ID</string>
+<string name="fb_login_protocol_scheme">fbYOUR_FACEBOOK_APP_ID</string>
+<string name="facebook_client_token">YOUR_FACEBOOK_CLIENT_TOKEN</string>
+```
+
+Replace:
+- `YOUR_FACEBOOK_APP_ID` with your Facebook App ID
+- `YOUR_FACEBOOK_CLIENT_TOKEN` with your Facebook Client Token
+
+</details>
+
+<details>
+<summary><b>Apple Configuration</b></summary>
+
+Edit `prebuild-sync-src/android/app/build.gradle` under `defaultConfig`:
+
+```gradle
+android {
+    defaultConfig {
+        manifestPlaceholders = [appAuthRedirectScheme: 'YOUR_APPLE_SERVICE_ID']
+    }
+}
+```
+
+Replace `YOUR_APPLE_SERVICE_ID` with your Apple Service ID (e.g., `com.yourcompany.yourapp`)
+
+</details>
+
+---
+
+## Troubleshooting
+
+If you encounter build or Metro bundler errors:
+
+1. **Clean install and rebuild:**
+   ```sh
+   rm -rf node_modules package-lock.json android ios .expo
+   npm install
+   npx expo prebuild --clean
+   ```
+
+2. **Clear Metro bundler cache:**
+   ```sh
+   npx expo start --clear
+   ```
+
+3. **Ensure you're using npm (not yarn):**
+   - Check that `package-lock.json` exists (not `yarn.lock`)
+   - If yarn was used, remove `yarn.lock` and reinstall with npm
+
+---
+
+## Migrating from SDK v1 (Bare React Native)
+
+If you have an existing bare React Native project using SDK v1 and want to upgrade to SDK v2, see the [Complete Migration Guide](MIGRATION_GUIDE.md).
+
+For reference, the SDK v1 sample app is preserved on the [sdk-v1](https://github.com/circlefin/w3s-react-native-sample-app-wallets/tree/sdk-v1) branch.

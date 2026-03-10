@@ -1,0 +1,77 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+  <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <item name="android:enforceNavigationBarContrast" tools:targetApi="29">true</item>
+    <item name="android:editTextBackground">@drawable/rn_edit_text_material</item>
+    <item name="android:statusBarColor">#ffffff</item>
+    <item name="colorPrimary">@color/colorPrimary</item>
+  </style>
+  <style name="circlepw_heading3">
+    <item name="android:fontFamily">@font/inter_semi_bold</item>
+    <item name="android:fontWeight" tools:targetApi="o">600</item>
+    <item name="android:textSize">24sp</item>
+  </style>
+  <style name="circlepw_heading4">
+    <item name="android:fontFamily">@font/inter_semi_bold</item>
+    <item name="android:fontWeight" tools:targetApi="o">600</item>
+    <item name="android:textSize">20sp</item>
+  </style>
+  <style name="circlepw_heading5">
+    <item name="android:fontFamily">@font/inter_semi_bold</item>
+    <item name="android:fontWeight" tools:targetApi="o">600</item>
+    <item name="android:textSize">18sp</item>
+  </style>
+  <style name="circlepw_body1">
+    <item name="android:fontFamily">@font/inter_regular</item>
+    <item name="android:fontWeight" tools:targetApi="o">400</item>
+    <item name="android:textSize">16sp</item>
+  </style>
+  <style name="circlepw_body2">
+    <item name="android:fontFamily">@font/inter_regular</item>
+    <item name="android:fontWeight" tools:targetApi="o">400</item>
+    <item name="android:textSize">14sp</item>
+  </style>
+  <style name="circlepw_caption1">
+    <item name="android:fontFamily">@font/inter_semi_bold</item>
+    <item name="android:fontWeight" tools:targetApi="o">600</item>
+    <item name="android:textSize">16sp</item>
+  </style>
+  <style name="circlepw_caption2">
+    <item name="android:fontFamily">@font/inter_semi_bold</item>
+    <item name="android:fontWeight" tools:targetApi="o">600</item>
+    <item name="android:textSize">14sp</item>
+  </style>
+  <style name="circlepw_metadata1">
+    <item name="android:fontFamily">@font/inter_regular</item>
+    <item name="android:textSize">12sp</item>
+  </style>
+  <style name="circlepw_metadata2">
+    <item name="android:fontFamily">@font/inter_regular</item>
+    <item name="android:textSize">10sp</item>
+  </style>
+  <style name="circlepw_actionText">
+    <item name="android:fontFamily">@font/inter_semi_bold</item>
+    <item name="android:fontWeight" tools:targetApi="o">600</item>
+    <item name="android:textSize">14sp</item>
+  </style>
+  <style name="circlepw_pinDigitText">
+    <item name="android:fontFamily">@font/inter_light</item>
+    <item name="android:fontWeight" tools:targetApi="o">300</item>
+    <item name="android:textSize">40sp</item>
+  </style>
+  <style name="circlepw_mainButtonText">
+    <item name="android:fontFamily">@font/inter_medium</item>
+    <item name="android:fontWeight" tools:targetApi="o">500</item>
+    <item name="android:textSize">16sp</item>
+  </style>
+  <style name="circlepw_toolbarTitle">
+    <item name="android:fontFamily">@font/inter_medium</item>
+    <item name="android:fontWeight" tools:targetApi="o">500</item>
+    <item name="android:textSize">18sp</item>
+  </style>
+  <style name="Theme.App.SplashScreen" parent="Theme.SplashScreen">
+    <item name="windowSplashScreenBackground">@color/splashscreen_background</item>
+    <item name="windowSplashScreenAnimatedIcon">@drawable/splashscreen_logo</item>
+    <item name="postSplashScreenTheme">@style/AppTheme</item>
+    <item name="android:windowSplashScreenBehavior">icon_preferred</item>
+  </style>
+</resources>
