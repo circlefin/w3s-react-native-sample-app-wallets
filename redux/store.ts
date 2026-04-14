@@ -16,16 +16,16 @@
  * limitations under the License.
  */
 
-import { configureStore } from '@reduxjs/toolkit'
-import settingsReducer from '@features/settings/settingsSlice'
-import resultReducer from '@features/result/resultSlice'
+import { configureStore } from "@reduxjs/toolkit";
+import settingsReducer from "@features/settings/settingsSlice";
+import resultReducer from "@features/result/resultSlice";
 
 export const store = configureStore({
   reducer: {
     settings: settingsReducer,
     result: resultReducer,
   },
-})
+});
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;

@@ -16,105 +16,115 @@
  * limitations under the License.
  */
 
-import * as React from "react"
-import { Text, View } from "react-native"
-import { useTranslation } from 'react-i18next'
-import { commonStyles } from "../styles"
-import CommonInputText from "./CommonInputText"
-import CopyableText from "./CopyableText"
-import { WalletSdk, SocialProvider } from "@circle-fin/w3s-pw-react-native-sdk"
-import useWalletSdk from "../utils/useWalletSdk"
-import { AuthMode } from "../redux/types"
-import { ShowSnackBarFn } from "../utils/useSnackBar"
-import RequiredMarkText from "./RequiredMarkText"
-import { SocialLoginButton } from "./SocialLoginButton"
-import HyperlinkText from "./HyperlinkText"
-import { GoExecuteButton } from "./GoExecuteButton"
-import { useRouter } from "expo-router"
-import { useAppDispatch, useAppSelector } from "@redux/hooks"
-import { setAppId } from "@features/settings/settingsSlice"
-import { selectSocialUserToken, selectSocialEncryptionKey } from "../features/result/resultSlice"
+import * as React from "react";
+import { Text, View } from "react-native";
+import { useTranslation } from "react-i18next";
+import { commonStyles } from "../styles";
+import CommonInputText from "./CommonInputText";
+import CopyableText from "./CopyableText";
+import { WalletSdk, SocialProvider } from "@circle-fin/w3s-pw-react-native-sdk";
+import useWalletSdk from "../utils/useWalletSdk";
+import { AuthMode } from "../redux/types";
+import { ShowSnackBarFn } from "../utils/useSnackBar";
+import RequiredMarkText from "./RequiredMarkText";
+import { SocialLoginButton } from "./SocialLoginButton";
+import HyperlinkText from "./HyperlinkText";
+import { GoExecuteButton } from "./GoExecuteButton";
+import { useRouter } from "expo-router";
+import { useAppSelector } from "@redux/hooks";
+import {
+  selectSocialUserToken,
+  selectSocialEncryptionKey,
+} from "../features/result/resultSlice";
 
 interface SocialTabProps {
   showSnackBar: ShowSnackBarFn;
 }
 
 export const SocialTab: React.FC<SocialTabProps> = ({ showSnackBar }) => {
-  const DOC_URL = 'https://developers.circle.com/w3s/docs/authentication-methods#create-a-wallet-with-social-logins'
-  const router = useRouter()
-  const { t } = useTranslation()
-  const dispatch = useAppDispatch()
-  const { appId: reduxAppId } = useAppSelector(state => state.settings)
-  const socialUserToken = useAppSelector(selectSocialUserToken)
-  const socialEncryptionKey = useAppSelector(selectSocialEncryptionKey)
-  
-  const {
-    appId, 
-    dispatchAppId, 
-    logoutAndLogin, 
-    dispatchLoginResult
-  } = useWalletSdk(showSnackBar)
-  
-  const [deviceToken, setDeviceToken] = React.useState("")
-  const [deviceEncryptionKey, setDeviceEncryptionKey] = React.useState("")
+  const DOC_URL =
+    "https://developers.circle.com/w3s/docs/authentication-methods#create-a-wallet-with-social-logins";
+  const router = useRouter();
+  const { t } = useTranslation();
+  const { appId: reduxAppId } = useAppSelector((state) => state.settings);
+  const socialUserToken = useAppSelector(selectSocialUserToken);
+  const socialEncryptionKey = useAppSelector(selectSocialEncryptionKey);
+
+  const { appId, dispatchAppId, logoutAndLogin, dispatchLoginResult } =
+    useWalletSdk(showSnackBar);
+
+  const [deviceToken, setDeviceToken] = React.useState("");
+  const [deviceEncryptionKey, setDeviceEncryptionKey] = React.useState("");
 
   const LoginButton = (provider: SocialProvider) => {
     return (
-      <SocialLoginButton 
+      <SocialLoginButton
         disabled={deviceToken.length === 0 || deviceEncryptionKey.length === 0}
-        provider={provider} 
+        provider={provider}
         onPress={() => {
           logoutAndLogin(
-            provider, 
-            deviceToken, 
+            provider,
+            deviceToken,
             deviceEncryptionKey,
-            loginResult => {
-              dispatchLoginResult(AuthMode.social, loginResult)
-              showSnackBar(t('login_success'), true)
-              console.log('login_success')
+            (loginResult) => {
+              dispatchLoginResult(AuthMode.social, loginResult);
+              showSnackBar(t("login_success"), true);
+              console.log("login_success");
             },
-            e => {
-              console.log('login_failed:'+e.message)
-              showSnackBar(e.message, false)
-            }
-          )
+            (e) => {
+              console.log("login_failed:" + (e?.message || "Unknown error"));
+              showSnackBar(e?.message || "Unknown error", false);
+            },
+          );
         }}
       />
-    )
-  }
+    );
+  };
 
   const SectionText = () => {
     return (
-      <View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 24, marginBottom: 12 }}>
+      <View
+        style={{
+          flexDirection: "row",
+          justifyContent: "center",
+          marginTop: 24,
+          marginBottom: 12,
+        }}
+      >
         <View style={commonStyles.sectionLine} />
         <Text style={commonStyles.sectionText}>{t("log_in_with_section")}</Text>
         <View style={commonStyles.sectionLine} />
       </View>
-    )
-  }
+    );
+  };
 
   return (
     <View style={commonStyles.containerWithPadding}>
-      <Text style={[commonStyles.inputTitle, { marginTop: 12 }]}>{t("device_id_title")}</Text>
-      <CopyableText accessibilityLabel={'deviceId'} value={WalletSdk.deviceId} />
-      
-      <RequiredMarkText text={t('appid_title')} />
+      <Text style={[commonStyles.inputTitle, { marginTop: 12 }]}>
+        {t("device_id_title")}
+      </Text>
+      <CopyableText
+        accessibilityLabel={"deviceId"}
+        value={WalletSdk.deviceId}
+      />
+
+      <RequiredMarkText text={t("appid_title")} />
       <CommonInputText
         accessibilityLabel={"appIdInput"}
         onChangeText={(value) => {
-          dispatchAppId(value)
+          dispatchAppId(value);
         }}
         value={appId || reduxAppId}
       />
-      
-      <RequiredMarkText text={t('device_token_title')} />
+
+      <RequiredMarkText text={t("device_token_title")} />
       <CommonInputText
         accessibilityLabel={"deviceTokenInput"}
         onChangeText={setDeviceToken}
         value={deviceToken}
       />
-      
-      <RequiredMarkText text={t('device_encryption_title')} />
+
+      <RequiredMarkText text={t("device_encryption_title")} />
       <CommonInputText
         accessibilityLabel={"deviceEncryptionKeyInput"}
         onChangeText={setDeviceEncryptionKey}
@@ -125,28 +135,28 @@ export const SocialTab: React.FC<SocialTabProps> = ({ showSnackBar }) => {
       {LoginButton(SocialProvider.Google)}
       {LoginButton(SocialProvider.Facebook)}
       {LoginButton(SocialProvider.Apple)}
-      
+
       {socialUserToken != null && socialEncryptionKey != null && (
         <GoExecuteButton
           accessibilityLabel={"socialGoExecuteBt"}
           onPress={() => {
             router.push({
-              pathname: '/ExecuteScreen',
-              params: { 
+              pathname: "/ExecuteScreen",
+              params: {
                 authMode: AuthMode.social,
                 userToken: socialUserToken,
-                encryptionKey: socialEncryptionKey
-              }
-            })
+                encryptionKey: socialEncryptionKey,
+              },
+            });
           }}
         />
       )}
-      
-      <HyperlinkText 
-        fullText={t('info_full_text')} 
-        linkText={t('info_link_text')} 
-        url={DOC_URL} 
+
+      <HyperlinkText
+        fullText={t("info_full_text")}
+        linkText={t("info_link_text")}
+        url={DOC_URL}
       />
     </View>
-  )
-}
+  );
+};

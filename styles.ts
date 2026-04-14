@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-import { StyleSheet } from "react-native"
+import { StyleSheet } from "react-native";
 
 export const colors = {
   text_main: "#1A1A1A",
@@ -53,14 +53,14 @@ export const colors = {
   snackbar_success_bg: "#008339",
   snackbar_error_bg: "#FFEAEF",
   snackbar_error_text: "#BC0016",
-}
+};
 
-export const pagePaddingH = 16
+export const pagePaddingH = 16;
 
 export const commonStyles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.background
+    backgroundColor: colors.background,
   },
   containerWithPadding: {
     flex: 1,
@@ -75,7 +75,7 @@ export const commonStyles = StyleSheet.create({
     borderRadius: 56,
     minHeight: 56,
     paddingVertical: 8,
-    justifyContent: "center"
+    justifyContent: "center",
   },
   secondaryButton: {
     marginTop: 24,
@@ -86,46 +86,46 @@ export const commonStyles = StyleSheet.create({
     borderRadius: 56,
     minHeight: 56,
     paddingVertical: 8,
-    justifyContent: "center"
+    justifyContent: "center",
   },
   disabledMainButton: {
-    backgroundColor: colors.disabled_main_bt_background
+    backgroundColor: colors.disabled_main_bt_background,
   },
   disabledSecondaryButton: {
     backgroundColor: colors.disabled_secondary_bt_background,
-    opacity: 0.5
+    opacity: 0.5,
   },
   disabledMainButtonText: {
-    color: colors.disabled_main_bt_text
+    color: colors.disabled_main_bt_text,
   },
   disabledSecondaryButtonText: {
-    color: colors.disabled_secondary_bt_text
+    color: colors.disabled_secondary_bt_text,
   },
   mainButtonText: {
     color: colors.main_bt_text,
     fontWeight: "500",
-    fontSize: 16
+    fontSize: 16,
   },
   secondaryButtonText: {
     color: colors.primary,
     fontWeight: "500",
-    fontSize: 16
+    fontSize: 16,
   },
   sectionLine: {
     height: 1,
     backgroundColor: colors.section_line,
     flexShrink: 1,
-    alignSelf: 'center',
-    flex: 1
+    alignSelf: "center",
+    flex: 1,
   },
   sectionText: {
     color: colors.section_text,
-    textAlign: 'center',
+    textAlign: "center",
     fontWeight: "400",
     fontSize: 14,
     marginHorizontal: 16,
-    alignSelf: 'center',
-    justifyContent: 'center',
+    alignSelf: "center",
+    justifyContent: "center",
   },
   inputTitle: {
     color: colors.text_auxiliary,
@@ -139,28 +139,28 @@ export const commonStyles = StyleSheet.create({
     color: colors.text_main,
     fontWeight: "400",
     fontSize: 16,
-    marginTop: 0
+    marginTop: 0,
   },
   tabText: {
     color: colors.tab_focused,
     fontSize: 14,
-    fontWeight: "600"
+    fontWeight: "600",
   },
   heading: {
     color: colors.text_main,
     fontSize: 22,
     fontWeight: "600",
     marginTop: 24,
-    textAlign: 'center',
-    paddingHorizontal: pagePaddingH
+    textAlign: "center",
+    paddingHorizontal: pagePaddingH,
   },
   desc: {
     color: colors.text_desc,
     fontSize: 14,
     marginTop: 16,
     marginBottom: 24,
-    textAlign: 'center',
-    paddingHorizontal: pagePaddingH
+    textAlign: "center",
+    paddingHorizontal: pagePaddingH,
   },
   normalInputField: {
     marginTop: 8,
@@ -172,7 +172,7 @@ export const commonStyles = StyleSheet.create({
     paddingVertical: 8,
     color: colors.text_main,
     fontWeight: "400",
-    fontSize: 16
+    fontSize: 16,
   },
   normalValueText: {
     color: colors.text_main,
@@ -181,21 +181,21 @@ export const commonStyles = StyleSheet.create({
     marginTop: 8,
     marginBottom: 4,
     minHeight: 24,
-    flexShrink: 1
+    flexShrink: 1,
   },
   disabledInputField: {
     borderColor: colors.input_boarder,
-    backgroundColor: colors.disabled_input_background
+    backgroundColor: colors.disabled_input_background,
   },
   focusedInputField: {
-    borderColor: colors.input_boarder_focused
+    borderColor: colors.input_boarder_focused,
   },
   requiredMark: {
     color: colors.required_red,
-    borderColor: 'red',
+    borderColor: "red",
     fontWeight: "400",
     fontSize: 12,
     marginLeft: 4,
-    flexWrap: 'wrap'
+    flexWrap: "wrap",
   },
-})
+});

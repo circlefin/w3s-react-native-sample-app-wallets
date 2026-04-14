@@ -16,35 +16,43 @@
  * limitations under the License.
  */
 
-import { Image, Text, TouchableOpacity } from "react-native"
-import { commonStyles } from "../styles"
-import React from "react"
-import * as Clipboard from 'expo-clipboard'
+import { Image, Text, TouchableOpacity } from "react-native";
+import { commonStyles } from "../styles";
+import React from "react";
+import * as Clipboard from "expo-clipboard";
 
 export type CopyableTextProps = {
   accessibilityLabel: string;
   value: string | undefined | null;
 };
 
-export default function CopyableText({ accessibilityLabel, value }: CopyableTextProps) {
+export default function CopyableText({
+  accessibilityLabel,
+  value,
+}: CopyableTextProps) {
   return (
     <TouchableOpacity
-      style={{ flexDirection: 'row', alignItems: 'center' }}
+      style={{ flexDirection: "row", alignItems: "center" }}
       activeOpacity={0.6}
       onPress={async () => {
         if (value) {
           if (__DEV__) {
-            console.log(value)
+            console.log(value);
           }
-          await Clipboard.setStringAsync(value)
+          await Clipboard.setStringAsync(value);
         }
-      }}>
+      }}
+    >
       <Text
         accessibilityLabel={accessibilityLabel}
-        style={[commonStyles.normalValueText]}>
+        style={[commonStyles.normalValueText]}
+      >
         {value}
       </Text>
-      <Image source={require('../assets/image/ic_copy.png')} style={{ marginRight: 16 }} />
+      <Image
+        source={require("../assets/image/ic_copy.png")}
+        style={{ marginRight: 16 }}
+      />
     </TouchableOpacity>
-  )
+  );
 }

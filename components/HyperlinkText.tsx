@@ -16,9 +16,9 @@
  * limitations under the License.
  */
 
-import { Linking, StyleSheet, Text } from "react-native"
-import { colors } from "../styles"
-import React from "react"
+import { Linking, StyleSheet, Text } from "react-native";
+import { colors } from "../styles";
+import React from "react";
 
 export type HyperlinkTextProps = {
   fullText: string;
@@ -26,22 +26,29 @@ export type HyperlinkTextProps = {
   url: string;
 };
 
-export default function HyperlinkText({ fullText, linkText, url }: HyperlinkTextProps) {
-  const startIndex = linkText ? fullText.indexOf(linkText) : -1
-  
+export default function HyperlinkText({
+  fullText,
+  linkText,
+  url,
+}: HyperlinkTextProps) {
+  const startIndex = linkText ? fullText.indexOf(linkText) : -1;
+
   const getPlainArr = () => {
     switch (startIndex) {
       case 0:
-        return ['', fullText.substring(linkText.length)]
+        return ["", fullText.substring(linkText.length)];
       case -1:
-        return [fullText, '']
+        return [fullText, ""];
       default:
-        return [fullText.substring(0, startIndex), fullText.substring(startIndex + linkText.length)]
+        return [
+          fullText.substring(0, startIndex),
+          fullText.substring(startIndex + linkText.length),
+        ];
     }
-  }
-  
-  const plainArr = getPlainArr()
-  
+  };
+
+  const plainArr = getPlainArr();
+
   return (
     <Text style={[styles.desc]}>
       {plainArr[0]}
@@ -49,14 +56,15 @@ export default function HyperlinkText({ fullText, linkText, url }: HyperlinkText
         <Text
           style={styles.hyperlink}
           onPress={() => {
-            Linking.openURL(url)
-          }}>
+            Linking.openURL(url);
+          }}
+        >
           {linkText}
         </Text>
       )}
       {plainArr[1]}
     </Text>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -71,4 +79,4 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     fontSize: 14,
   },
-})
+});

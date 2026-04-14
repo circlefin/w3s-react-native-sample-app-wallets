@@ -16,32 +16,37 @@
  * limitations under the License.
  */
 
-import * as React from "react"
-import { Text, View } from "react-native"
-import { MainButton } from "./MainButton"
-import { useTranslation } from 'react-i18next'
-import { commonStyles } from "../styles"
-import CommonInputText from "./CommonInputText"
-import useWalletSdk from "../utils/useWalletSdk"
-import { ShowSnackBarFn } from "../utils/useSnackBar"
-import RequiredMarkText from "./RequiredMarkText"
-import { BiometricsSwitchButton } from "./BiometricsSwitch"
+import * as React from "react";
+import { Text, View } from "react-native";
+import { MainButton } from "./MainButton";
+import { useTranslation } from "react-i18next";
+import { commonStyles } from "../styles";
+import CommonInputText from "./CommonInputText";
+import useWalletSdk from "../utils/useWalletSdk";
+import { ShowSnackBarFn } from "../utils/useSnackBar";
+import RequiredMarkText from "./RequiredMarkText";
+import { BiometricsSwitchButton } from "./BiometricsSwitch";
 
 interface PinTabProps {
   showSnackBar: ShowSnackBarFn;
 }
 
 export const PinTab: React.FC<PinTabProps> = ({ showSnackBar }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const {
-    endpoint, appId, enableBiometricsPin,
-    dispatchEndpoint, dispatchAppId, dispatchEnableBiometrics,
-    execute, setBiometricsPin
-  } = useWalletSdk(showSnackBar)
-  const [userToken, setUserToken] = React.useState("")
-  const [encryptionKey, setEncryptionKey] = React.useState("")
-  const [challengeId, setChallengeId] = React.useState("")
-  
+    endpoint,
+    appId,
+    enableBiometricsPin,
+    dispatchEndpoint,
+    dispatchAppId,
+    dispatchEnableBiometrics,
+    execute,
+    setBiometricsPin,
+  } = useWalletSdk(showSnackBar);
+  const [userToken, setUserToken] = React.useState("");
+  const [encryptionKey, setEncryptionKey] = React.useState("");
+  const [challengeId, setChallengeId] = React.useState("");
+
   const isSetBiometricsPinDisabled = () => {
     return (
       !enableBiometricsPin ||
@@ -49,54 +54,48 @@ export const PinTab: React.FC<PinTabProps> = ({ showSnackBar }) => {
       !appId ||
       !encryptionKey ||
       !userToken
-    )
-  }
-  
+    );
+  };
+
   const isExecuteDisabled = () => {
-    return (
-      !endpoint ||
-      !appId ||
-      !userToken ||
-      !encryptionKey ||
-      !challengeId
-    )
-  }
-  
+    return !endpoint || !appId || !userToken || !encryptionKey || !challengeId;
+  };
+
   const successCallback = (result: any) => {
-    showSnackBar(t('execute_success'), true)
-    console.log(JSON.stringify(result))
-  }
-  
-  const errorCallback = (e: any) => { 
-    const message = e?.message || 'Unknown error'
-    showSnackBar(message, false)
-  }
-  
+    showSnackBar(t("execute_success"), true);
+    console.log(JSON.stringify(result));
+  };
+
+  const errorCallback = (e: any) => {
+    const message = e?.message || "Unknown error";
+    showSnackBar(message, false);
+  };
+
   return (
     <View style={commonStyles.containerWithPadding}>
-      <RequiredMarkText text={t('endpoint_title')} style={{marginTop: 12}}/>
+      <RequiredMarkText text={t("endpoint_title")} style={{ marginTop: 12 }} />
       <CommonInputText
         accessibilityLabel={"endpointInput"}
         onChangeText={(value) => {
-          dispatchEndpoint(value)
+          dispatchEndpoint(value);
         }}
         value={endpoint}
       />
-      <RequiredMarkText text={t('appid_title')}/>
+      <RequiredMarkText text={t("appid_title")} />
       <CommonInputText
         accessibilityLabel={"appIdInput"}
         onChangeText={(value) => {
-          dispatchAppId(value)
+          dispatchAppId(value);
         }}
         value={appId}
       />
-      <RequiredMarkText text={t('user_token_title')}/>
+      <RequiredMarkText text={t("user_token_title")} />
       <CommonInputText
         accessibilityLabel={"userTokenInput"}
         onChangeText={setUserToken}
         value={userToken}
       />
-      <RequiredMarkText text={t('encryption_title')}/>
+      <RequiredMarkText text={t("encryption_title")} />
       <CommonInputText
         accessibilityLabel={"encryptionKeyInput"}
         onChangeText={setEncryptionKey}
@@ -112,7 +111,7 @@ export const PinTab: React.FC<PinTabProps> = ({ showSnackBar }) => {
         accessibilityLabel={"biometricsSwitch"}
         enableSwitch={enableBiometricsPin}
         onValueChange={(value) => {
-          dispatchEnableBiometrics(value)
+          dispatchEnableBiometrics(value);
         }}
         value={enableBiometricsPin}
       />
@@ -122,7 +121,13 @@ export const PinTab: React.FC<PinTabProps> = ({ showSnackBar }) => {
         isSecondary={false}
         text={t("execute_bt")}
         onPress={() => {
-          execute(userToken, encryptionKey, challengeId, successCallback, errorCallback)
+          execute(
+            userToken,
+            encryptionKey,
+            challengeId,
+            successCallback,
+            errorCallback,
+          );
         }}
       />
       <MainButton
@@ -131,9 +136,14 @@ export const PinTab: React.FC<PinTabProps> = ({ showSnackBar }) => {
         disabled={isSetBiometricsPinDisabled()}
         text={t("set_biometrics_pin_bt")}
         onPress={() => {
-          setBiometricsPin(userToken, encryptionKey, successCallback, errorCallback)
+          setBiometricsPin(
+            userToken,
+            encryptionKey,
+            successCallback,
+            errorCallback,
+          );
         }}
       />
     </View>
-  )
-}
+  );
+};

@@ -16,9 +16,9 @@
  * limitations under the License.
  */
 
-import { TextInput, TextInputProps } from "react-native"
-import { colors, commonStyles } from "../styles"
-import React from "react"
+import { TextInput, TextInputProps } from "react-native";
+import { colors, commonStyles } from "../styles";
+import React from "react";
 
 export default function CommonInputText(props: TextInputProps) {
   return (
@@ -29,5 +29,5 @@ export default function CommonInputText(props: TextInputProps) {
       placeholderTextColor={colors.placeholder}
       style={[commonStyles.normalInputField, props.style]}
     />
-  )
+  );
 }

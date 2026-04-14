@@ -16,87 +16,87 @@
  * limitations under the License.
  */
 
-import * as React from "react"
-import { Text, View } from "react-native"
-import { MainButton } from "./MainButton"
-import { useTranslation } from 'react-i18next'
-import { commonStyles } from "../styles"
-import CommonInputText from "./CommonInputText"
-import useWalletSdk from "../utils/useWalletSdk"
-import { AuthMode } from "../redux/types"
-import { ShowSnackBarFn } from "../utils/useSnackBar"
-import CopyableText from "./CopyableText"
-import { WalletSdk } from "@circle-fin/w3s-pw-react-native-sdk"
-import RequiredMarkText from "./RequiredMarkText"
-import { GoExecuteButton } from "./GoExecuteButton"
-import { useRouter } from "expo-router"
+import * as React from "react";
+import { Text, View } from "react-native";
+import { MainButton } from "./MainButton";
+import { useTranslation } from "react-i18next";
+import { commonStyles } from "../styles";
+import CommonInputText from "./CommonInputText";
+import useWalletSdk from "../utils/useWalletSdk";
+import { AuthMode } from "../redux/types";
+import { ShowSnackBarFn } from "../utils/useSnackBar";
+import CopyableText from "./CopyableText";
+import { WalletSdk } from "@circle-fin/w3s-pw-react-native-sdk";
+import RequiredMarkText from "./RequiredMarkText";
+import { GoExecuteButton } from "./GoExecuteButton";
+import { useRouter } from "expo-router";
 
 interface EmailTabProps {
   showSnackBar: ShowSnackBarFn;
 }
 
 export const EmailTab: React.FC<EmailTabProps> = ({ showSnackBar }) => {
-  const router = useRouter()
-  const { t } = useTranslation()
-  
+  const router = useRouter();
+  const { t } = useTranslation();
+
   const {
-    appId, 
-    dispatchAppId, 
-    verifyOtp, 
+    appId,
+    dispatchAppId,
+    verifyOtp,
     dispatchLoginResult,
-    // Get email auth data directly from the hook 
+    // Get email auth data directly from the hook
     emailUserToken,
-    emailEncryptionKey
-  } = useWalletSdk(showSnackBar)
-  
-  const [deviceToken, setDeviceToken] = React.useState("")
-  const [deviceEncryptionKey, setDeviceEncryptionKey] = React.useState("")
-  const [otpToken, setOtpToken] = React.useState("")
+    emailEncryptionKey,
+  } = useWalletSdk(showSnackBar);
+
+  const [deviceToken, setDeviceToken] = React.useState("");
+  const [deviceEncryptionKey, setDeviceEncryptionKey] = React.useState("");
+  const [otpToken, setOtpToken] = React.useState("");
 
   const isEmailLoginDisabled = () => {
-    return (
-      !appId ||
-      !deviceToken ||
-      !deviceEncryptionKey ||
-      !otpToken
-    )
-  }
+    return !appId || !deviceToken || !deviceEncryptionKey || !otpToken;
+  };
 
   return (
     <View style={commonStyles.containerWithPadding}>
-      <Text style={[commonStyles.inputTitle, { marginTop: 12 }]}>{t("device_id_title")}</Text>
-      <CopyableText accessibilityLabel={'deviceId'} value={WalletSdk.deviceId} />
-      
-      <RequiredMarkText text={t('appid_title')} />
+      <Text style={[commonStyles.inputTitle, { marginTop: 12 }]}>
+        {t("device_id_title")}
+      </Text>
+      <CopyableText
+        accessibilityLabel={"deviceId"}
+        value={WalletSdk.deviceId}
+      />
+
+      <RequiredMarkText text={t("appid_title")} />
       <CommonInputText
         accessibilityLabel={"appIdInput"}
         onChangeText={(value) => {
-          dispatchAppId(value)
+          dispatchAppId(value);
         }}
         value={appId}
       />
-      
-      <RequiredMarkText text={t('device_token_title')} />
+
+      <RequiredMarkText text={t("device_token_title")} />
       <CommonInputText
         accessibilityLabel={"deviceTokenInput"}
         onChangeText={setDeviceToken}
         value={deviceToken}
       />
-      
-      <RequiredMarkText text={t('device_encryption_title')} />
+
+      <RequiredMarkText text={t("device_encryption_title")} />
       <CommonInputText
         accessibilityLabel={"deviceEncryptionKeyInput"}
         onChangeText={setDeviceEncryptionKey}
         value={deviceEncryptionKey}
       />
-      
-      <RequiredMarkText text={t('otp_token_title')} />
+
+      <RequiredMarkText text={t("otp_token_title")} />
       <CommonInputText
         accessibilityLabel={"otpTokenInput"}
         onChangeText={setOtpToken}
         value={otpToken}
       />
-      
+
       <MainButton
         accessibilityLabel={"emailLoginBt"}
         disabled={isEmailLoginDisabled()}
@@ -104,36 +104,36 @@ export const EmailTab: React.FC<EmailTabProps> = ({ showSnackBar }) => {
         text={t("email_login_bt")}
         onPress={() => {
           verifyOtp(
-            otpToken, 
-            deviceToken, 
+            otpToken,
+            deviceToken,
             deviceEncryptionKey,
-            loginResult => {
-              dispatchLoginResult(AuthMode.email, loginResult)
-              showSnackBar(t('login_success'), true)
+            (loginResult) => {
+              dispatchLoginResult(AuthMode.email, loginResult);
+              showSnackBar(t("login_success"), true);
             },
-            e => {
-              showSnackBar(e.message, false)
-            }
-          )
+            (e) => {
+              showSnackBar(e?.message || "Unknown error", false);
+            },
+          );
         }}
       />
-      
+
       {emailUserToken != null && emailEncryptionKey != null && (
         <GoExecuteButton
           accessibilityLabel={"emailGoExecuteBt"}
           style={{ marginTop: 24 }}
           onPress={() => {
             router.push({
-              pathname: '/ExecuteScreen',
-              params: { 
+              pathname: "/ExecuteScreen",
+              params: {
                 authMode: AuthMode.email,
                 userToken: emailUserToken,
-                encryptionKey: emailEncryptionKey
-              }
-            })
+                encryptionKey: emailEncryptionKey,
+              },
+            });
           }}
         />
       )}
     </View>
-  )
-}
+  );
+};

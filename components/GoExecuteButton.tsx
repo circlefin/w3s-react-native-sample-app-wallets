@@ -16,35 +16,39 @@
  * limitations under the License.
  */
 
-import { Image, StyleSheet, Text, TouchableOpacity, TouchableOpacityProps, View } from "react-native"
-import { colors } from "../styles"
-import * as React from "react"
-import { useTranslation } from 'react-i18next'
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  TouchableOpacityProps,
+  View,
+} from "react-native";
+import { colors } from "../styles";
+import * as React from "react";
+import { useTranslation } from "react-i18next";
 
 export const GoExecuteButton = (props: GoExecuteButtonProps) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   return (
     <TouchableOpacity
       accessibilityLabel={props.accessibilityLabel}
       activeOpacity={0.7}
       onPress={props.onPress}
-      style={[styles.normalBg, props.style]}>
-      <Image 
-        source={require("../assets/image/ic_go_execute.png")} 
-        style={{ marginRight: 12, width: 48, height: 48 }} 
+      style={[styles.normalBg, props.style]}
+    >
+      <Image
+        source={require("../assets/image/ic_go_execute.png")}
+        style={{ marginRight: 12, width: 48, height: 48 }}
       />
-      
+
       <View style={{ flexShrink: 1 }}>
-        <Text style={styles.mainText}>
-          {t('go_execute_bt')}
-        </Text>
-        <Text style={styles.subText}>
-          {t('go_execute_bt_desc')}
-        </Text>
+        <Text style={styles.mainText}>{t("go_execute_bt")}</Text>
+        <Text style={styles.subText}>{t("go_execute_bt_desc")}</Text>
       </View>
     </TouchableOpacity>
-  )
-}
+  );
+};
 
 interface GoExecuteButtonProps extends TouchableOpacityProps {
   accessibilityLabel: string;
@@ -58,7 +62,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     borderColor: colors.input_boarder,
     marginTop: 16,
-    flexDirection: 'row',
+    flexDirection: "row",
   },
   mainText: {
     color: colors.tab_focused,
@@ -70,4 +74,4 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     fontSize: 14,
   },
-})
+});

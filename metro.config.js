@@ -17,17 +17,17 @@
  */
 
 // Learn more https://docs.expo.io/guides/customizing-metro
-const { getDefaultConfig } = require('expo/metro-config')
-const path = require('path')
+const { getDefaultConfig } = require("expo/metro-config");
+const path = require("path");
 
-const config = getDefaultConfig(__dirname)
+const config = getDefaultConfig(__dirname);
 
 config.resolver = {
   ...config.resolver,
   extraNodeModules: {
-    '@features': path.resolve(__dirname, 'features'),
-    '@redux': path.resolve(__dirname, 'redux')
-  }
-}
+    "@features": path.resolve(__dirname, "features"),
+    "@redux": path.resolve(__dirname, "redux"),
+  },
+};
 
-module.exports = config
+module.exports = config;
