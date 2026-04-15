@@ -2,6 +2,12 @@
 
 > This changelog keeps track of all updates and improvements made to `W3sSampleWallet`.
 
+## v2.1.1 - _(2026-04-14)_
+
+### 🚀 What's New
+
+- Dependency and security-related upgrades, including **@xmldom/xmldom**, **yaml**, **ajv** (addressing reported advisories).
+
 ## v2.1.0 - _(2026-04-13)_
 
 ### 🚀 What's New
