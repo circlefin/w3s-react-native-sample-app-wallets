@@ -16,89 +16,92 @@
  * limitations under the License.
  */
 
-import * as React from "react"
-import { StyleSheet, Text, View, Keyboard } from "react-native"
-import { SafeAreaView } from "react-native-safe-area-context"
-import { useTranslation } from "react-i18next"
-import { colors, commonStyles } from "../styles"
-import { useEffect, useState } from "react"
-import { DefaultCustomizer } from "../customize/DefaultCustomizer"
-import { useSnackBar } from "../utils/useSnackBar"
-import { MaterialTabBar, MaterialTabBarProps, Tabs } from 'react-native-collapsible-tab-view'
-import ProgrammablewalletRnSdk, { WalletSdk } from "@circle-fin/w3s-pw-react-native-sdk"
-import { SnackBar } from "../components/SnackBar"
-import { useRouter } from "expo-router"
-import { PinTab } from "../components/PinTab"
-import { EmailTab } from "../components/EmailTab"
-import { SocialTab } from "../components/SocialTab"
-
-const TAB_BAR_HEIGHT = 48
+import * as React from "react";
+import { StyleSheet, Text, View, Keyboard } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useTranslation } from "react-i18next";
+import { colors, commonStyles } from "../styles";
+import { useCallback, useEffect } from "react";
+import { DefaultCustomizer } from "../customize/DefaultCustomizer";
+import { useSnackBar } from "../utils/useSnackBar";
+import {
+  MaterialTabBar,
+  MaterialTabBarProps,
+  Tabs,
+} from "react-native-collapsible-tab-view";
+import ProgrammablewalletRnSdk, {
+  WalletSdk,
+} from "@circle-fin/w3s-pw-react-native-sdk";
+import { SnackBar } from "../components/SnackBar";
+import { PinTab } from "../components/PinTab";
+import { EmailTab } from "../components/EmailTab";
+import { SocialTab } from "../components/SocialTab";
 
 export default function IndexScreen() {
-  const { t } = useTranslation()
-  const { visible, message, isSuccess, showSnackBar, hideSnackBar } = useSnackBar()
-  const router = useRouter()
-  
-  // Initialize headerHeight state with the default value, will be updated dynamically
-  const [headerHeight, setHeaderHeight] = useState(TAB_BAR_HEIGHT)
+  const { t } = useTranslation();
+  const { visible, message, isSuccess, showSnackBar, hideSnackBar } =
+    useSnackBar();
 
   useEffect(() => {
-    DefaultCustomizer.setup()
+    DefaultCustomizer.setup();
     try {
       const eventListener = ProgrammablewalletRnSdk.addListener(
-        'CirclePwOnEvent',
+        "CirclePwOnEvent",
         (event) => {
-          console.log(event)
+          console.log(event);
           // Bring application to foreground
-          WalletSdk.moveRnTaskToFront()
+          WalletSdk.moveRnTaskToFront();
           // Dismiss keyboard to prevent it from blocking the snackbar
-          Keyboard.dismiss()
+          Keyboard.dismiss();
           // Format event content for display
-          const eventMessage = `CirclePwOnEvent: ${JSON.stringify(event)}`
-          showSnackBar(eventMessage, true)
-        }
-      )
-      
+          const eventMessage = `CirclePwOnEvent: ${JSON.stringify(event)}`;
+          showSnackBar(eventMessage, true);
+        },
+      );
+
       // Cleanup function
       return () => {
         // Remove the specific listener
-        eventListener.remove()
-      }
+        eventListener.remove();
+      };
     } catch (error) {
-      console.log("Error setting up SDK listeners:", error)
+      console.error("Error setting up SDK listeners:", error);
+      showSnackBar(
+        "Failed to initialize wallet SDK event listener. Please restart the app.",
+        false,
+      );
     }
-  }, [showSnackBar, t])
+  }, [showSnackBar]);
 
-  const header = () => {
-    return (
-      <View 
+  const header = useCallback(
+    () => (
+      <View
         style={{
-          alignItems: 'center',
-          justifyContent: 'center',
-          width: '100%'
-        }}
-        onLayout={(event) => {
-          // Dynamically measure the height of the header content
-          const { height } = event.nativeEvent.layout;
-          setHeaderHeight(height);
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100%",
         }}
       >
         <Text style={commonStyles.heading}>{t("main_title")}</Text>
         <Text style={commonStyles.desc}>{t("main_subtitle")}</Text>
       </View>
-    )
-  }
+    ),
+    [t],
+  );
 
-  const tabBar = (props: MaterialTabBarProps<string>) => (
-    <MaterialTabBar
-      {...props}
-      activeColor={colors.tab_focused}
-      inactiveColor={colors.tab_unfocused}
-      getLabelText={(name: string) => name}
-      labelStyle={commonStyles.tabText}
-      indicatorStyle={{ backgroundColor: colors.tab_focused }}
-    />
-  )
+  const tabBar = useCallback(
+    (props: MaterialTabBarProps<string>) => (
+      <MaterialTabBar
+        {...props}
+        activeColor={colors.tab_focused}
+        inactiveColor={colors.tab_unfocused}
+        getLabelText={(name: string) => name}
+        labelStyle={commonStyles.tabText}
+        indicatorStyle={{ backgroundColor: colors.tab_focused }}
+      />
+    ),
+    [],
+  );
 
   const tabView = () => {
     return (
@@ -106,27 +109,27 @@ export default function IndexScreen() {
         headerContainerStyle={styles.tab}
         renderHeader={header}
         renderTabBar={tabBar}
-        headerHeight={headerHeight}
-        initialTabName={t('tab_pin')}
+        initialTabName={t("tab_pin")}
+        allowHeaderOverscroll
       >
-        <Tabs.Tab name={t('tab_social')}>
+        <Tabs.Tab name={t("tab_social")}>
           <Tabs.ScrollView>
-          <SocialTab showSnackBar={showSnackBar} />
+            <SocialTab showSnackBar={showSnackBar} />
           </Tabs.ScrollView>
         </Tabs.Tab>
-        <Tabs.Tab name={t('tab_email')}>
+        <Tabs.Tab name={t("tab_email")}>
           <Tabs.ScrollView>
-          <EmailTab showSnackBar={showSnackBar}/>
+            <EmailTab showSnackBar={showSnackBar} />
           </Tabs.ScrollView>
         </Tabs.Tab>
-        <Tabs.Tab name={t('tab_pin')}>
+        <Tabs.Tab name={t("tab_pin")}>
           <Tabs.ScrollView>
-          <PinTab showSnackBar={showSnackBar} />
+            <PinTab showSnackBar={showSnackBar} />
           </Tabs.ScrollView>
         </Tabs.Tab>
       </Tabs.Container>
-    )
-  }
+    );
+  };
 
   return (
     <SafeAreaView style={commonStyles.container}>
@@ -138,7 +141,7 @@ export default function IndexScreen() {
         onDismiss={hideSnackBar}
       />
     </SafeAreaView>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
@@ -146,16 +149,16 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
-    position: 'absolute',
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
   },
   tab: {
     elevation: 0,
     backgroundColor: colors.background,
     borderBottomWidth: 1,
-    borderColor: colors.tab_underline
+    borderColor: colors.tab_underline,
   },
   indicator: { backgroundColor: colors.tab_focused },
-})
+});

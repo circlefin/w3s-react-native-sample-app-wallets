@@ -17,9 +17,9 @@
  */
 
 export enum AuthMode {
-  social = 'social',
-  email = 'email',
-  pin = 'pin',
+  social = "social",
+  email = "email",
+  pin = "pin",
 }
 
 export interface SettingsState {

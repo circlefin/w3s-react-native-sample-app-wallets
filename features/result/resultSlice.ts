@@ -16,22 +16,22 @@
  * limitations under the License.
  */
 
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import type { RootState } from '../../redux/store'
-import { AuthMode } from '../../redux/types'
-import type { LoginResult } from '@circle-fin/w3s-pw-react-native-sdk'
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import type { RootState } from "../../redux/store";
+import { AuthMode } from "../../redux/types";
+import type { LoginResult } from "@circle-fin/w3s-pw-react-native-sdk";
 
 export interface AuthLoginResult {
-  authMode: AuthMode,
-  result: LoginResult
+  authMode: AuthMode;
+  result: LoginResult;
 }
 
 // Define a type for the slice state
 interface ResultState {
-  emailUserToken?: string | undefined,
-  emailEncryptionKey?: string | undefined,
-  socialUserToken?: string | undefined,
-  socialEncryptionKey?: string | undefined,
+  emailUserToken?: string | undefined;
+  emailEncryptionKey?: string | undefined;
+  socialUserToken?: string | undefined;
+  socialEncryptionKey?: string | undefined;
 }
 
 // Define the initial state using that type
@@ -39,39 +39,41 @@ const initialState: ResultState = {
   emailEncryptionKey: undefined,
   emailUserToken: undefined,
   socialEncryptionKey: undefined,
-  socialUserToken: undefined
-}
+  socialUserToken: undefined,
+};
 
 export const resultSlice = createSlice({
-  name: 'result',
+  name: "result",
   initialState,
   reducers: {
     setLoginResult: (state, action: PayloadAction<AuthLoginResult>) => {
-      switch (action.payload.authMode){
+      switch (action.payload.authMode) {
         case AuthMode.email:
-          state.emailUserToken = action.payload.result.userToken
-          state.emailEncryptionKey = action.payload.result.encryptionKey
-          break
+          state.emailUserToken = action.payload.result.userToken;
+          state.emailEncryptionKey = action.payload.result.encryptionKey;
+          break;
         case AuthMode.social:
-          state.socialUserToken = action.payload.result.userToken
-          state.socialEncryptionKey = action.payload.result.encryptionKey
-          break
+          state.socialUserToken = action.payload.result.userToken;
+          state.socialEncryptionKey = action.payload.result.encryptionKey;
+          break;
         default:
           // Other auth modes (like PIN) don't store tokens/keys
-          break
+          break;
       }
-    }
+    },
   },
-})
+});
 
-export const { 
-  setLoginResult
-} = resultSlice.actions
+export const { setLoginResult } = resultSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
-export const selectEmailUserToken = (state: RootState) => state.result.emailUserToken
-export const selectEmailEncryptionKey = (state: RootState) => state.result.emailEncryptionKey
-export const selectSocialUserToken = (state: RootState) => state.result.socialUserToken
-export const selectSocialEncryptionKey = (state: RootState) => state.result.socialEncryptionKey
+export const selectEmailUserToken = (state: RootState) =>
+  state.result.emailUserToken;
+export const selectEmailEncryptionKey = (state: RootState) =>
+  state.result.emailEncryptionKey;
+export const selectSocialUserToken = (state: RootState) =>
+  state.result.socialUserToken;
+export const selectSocialEncryptionKey = (state: RootState) =>
+  state.result.socialEncryptionKey;
 
-export default resultSlice.reducer
+export default resultSlice.reducer;

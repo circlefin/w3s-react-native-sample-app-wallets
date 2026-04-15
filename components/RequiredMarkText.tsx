@@ -16,35 +16,35 @@
  * limitations under the License.
  */
 
-import { Text, View, StyleProp, TextStyle } from "react-native"
-import { commonStyles } from "../styles"
-import React from "react"
-import { useTranslation } from 'react-i18next'
+import { Text, View, StyleProp, TextStyle, ViewStyle } from "react-native";
+import { commonStyles } from "../styles";
+import React from "react";
+import { useTranslation } from "react-i18next";
 
 export type RequiredMarkTextProps = {
-  text: string,
-  style?: StyleProp<TextStyle> | undefined
-  markStyle?: StyleProp<TextStyle> | undefined
-}
+  text: string;
+  style?: StyleProp<ViewStyle> | undefined;
+  markStyle?: StyleProp<TextStyle> | undefined;
+};
 
 export default function RequiredMarkText(props: RequiredMarkTextProps) {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   return (
-    <View style={[
-      { 
-        flexDirection: 'row', 
-        alignItems: 'center', 
-        flexShrink: 1, 
-        justifyContent: 'flex-start'
-      }, 
-      props.style
-    ]}>
-      <Text style={[commonStyles.inputTitle]}>
-        {props.text}
-      </Text>
+    <View
+      style={[
+        {
+          flexDirection: "row",
+          alignItems: "center",
+          flexShrink: 1,
+          justifyContent: "flex-start",
+        },
+        props.style,
+      ]}
+    >
+      <Text style={[commonStyles.inputTitle]}>{props.text}</Text>
       <Text style={[commonStyles.requiredMark, props.markStyle]}>
-        {t('required_mark')}
+        {t("required_mark")}
       </Text>
     </View>
-  )
+  );
 }

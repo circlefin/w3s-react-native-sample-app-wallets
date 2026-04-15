@@ -12,17 +12,18 @@ If you have an existing bare React Native project using SDK v1 and want to upgra
   - [Path 2: Migrate to Expo-Managed Workflow](#path-2-migrate-to-expo-managed-workflow)
 - [API Changes](#api-changes)
 
-
 ---
 
 ### Understanding the Architecture Change
 
 **SDK v1**: Traditional bare React Native architecture
+
 - Package: `"@circle-fin/w3s-pw-react-native-sdk": "^1.0.0"`
 - Architecture: Bare React Native
 - Build: Manual native project setup
 
 **SDK v2**: Expo Modules architecture
+
 - Package: `"@circle-fin/w3s-pw-react-native-sdk": "^2.0.0"`
 - Architecture: Expo Modules
 - Build: Expo Prebuild
@@ -43,11 +44,13 @@ Choose the migration path based on your project's native code customizations:
 This approach preserves your existing native projects and adds Expo Modules support to them.
 
 **Best for:**
+
 - Projects with **custom native code** (native modules, custom configurations, etc.)
 - Teams that want to **continue managing** `ios/` and `android/` directories manually
 - Minimal changes to existing workflow
 
 **How it works:**
+
 - Uses `npx install-expo-modules@latest` to automatically configure native projects
 - Keeps your existing `ios/` and `android/` directories
 - Adds necessary Expo Modules configuration without removing customizations
@@ -76,11 +79,13 @@ npm install @circle-fin/w3s-pw-react-native-sdk@^2.0.0
 4. **Build and test:**
 
 For iOS:
+
 ```bash
 npm run ios
 ```
 
 For Android:
+
 ```bash
 npm run android
 ```
@@ -92,11 +97,13 @@ npm run android
 This approach converts your project to use Expo's managed workflow where `expo prebuild` generates and manages native code.
 
 **Best for:**
+
 - Projects with **minimal or no custom native code**
 - Teams that want **Expo to manage** native configurations
 - Simpler maintenance through declarative `app.json` configuration
 
 **How it works:**
+
 - Deletes and regenerates `ios/` and `android/` directories from `app.json`
 - Native code is managed by Expo (don't edit directly)
 - Run `expo prebuild` whenever you change native configuration
@@ -146,11 +153,13 @@ The `--clean` flag will delete and regenerate the native directories.
 5. **Build and test:**
 
 For iOS:
+
 ```bash
 npx expo run:ios
 ```
 
 For Android:
+
 ```bash
 npx expo run:android
 ```
@@ -167,31 +176,34 @@ npx expo run:android
 **Add listener:**
 
 SDK v1:
+
 ```typescript
 WalletSdk.addListener((event) => {
   // Handle event
-})
+});
 ```
 
 SDK v2:
+
 ```typescript
 const eventListener = ProgrammablewalletRnSdk.addListener(
-  'CirclePwOnEvent',
+  "CirclePwOnEvent",
   (event) => {
     // Handle event
-  }
-)
+  },
+);
 ```
 
 **Remove listener:**
 
 SDK v1:
+
 ```typescript
-WalletSdk.removeAllListeners()
+WalletSdk.removeAllListeners();
 ```
 
 SDK v2:
-```typescript
-eventListener.remove()
-```
 
+```typescript
+eventListener.remove();
+```

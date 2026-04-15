@@ -16,10 +16,10 @@
  * limitations under the License.
  */
 
-import React, { useEffect, useRef } from 'react'
-import { Animated, StyleSheet, Text } from 'react-native'
-import { colors } from '../styles'
-import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import React, { useEffect, useRef } from "react";
+import { Animated, StyleSheet, Text } from "react-native";
+import { colors } from "../styles";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 interface SnackBarProps {
   visible: boolean;
@@ -36,8 +36,8 @@ export const SnackBar: React.FC<SnackBarProps> = ({
   duration = 3000,
   onDismiss,
 }) => {
-  const opacity = useRef(new Animated.Value(0)).current
-  const insets = useSafeAreaInsets()
+  const opacity = useRef(new Animated.Value(0)).current;
+  const insets = useSafeAreaInsets();
 
   useEffect(() => {
     if (visible) {
@@ -52,33 +52,33 @@ export const SnackBar: React.FC<SnackBarProps> = ({
           toValue: 0,
           duration: 300,
           useNativeDriver: true,
-        })
+        }),
       ]).start(() => {
         if (onDismiss) {
-          onDismiss()
+          onDismiss();
         }
-      })
+      });
     }
-  }, [visible, duration, opacity, onDismiss])
+  }, [visible, duration, opacity, onDismiss]);
 
-  if (!visible) return null
+  if (!visible) return null;
 
   return (
-    <Animated.View 
+    <Animated.View
       style={[
-        styles.container, 
-        { 
+        styles.container,
+        {
           opacity,
-          bottom: insets.bottom 
+          bottom: insets.bottom,
         },
-        isSuccess ? styles.successContainer : styles.errorContainer
+        isSuccess ? styles.successContainer : styles.errorContainer,
       ]}
       accessibilityRole="alert"
     >
-      <Text 
+      <Text
         style={[
           styles.message,
-          isSuccess ? styles.successMessage : styles.errorMessage
+          isSuccess ? styles.successMessage : styles.errorMessage,
         ]}
         accessibilityLiveRegion="assertive"
         accessible={true}
@@ -87,18 +87,18 @@ export const SnackBar: React.FC<SnackBarProps> = ({
         {message}
       </Text>
     </Animated.View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
-    position: 'absolute',
+    position: "absolute",
     left: 20,
     right: 20,
     padding: 10,
     borderRadius: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     zIndex: 1000,
   },
   successContainer: {
@@ -111,9 +111,9 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   successMessage: {
-    color: 'white',
+    color: "white",
   },
   errorMessage: {
     color: colors.snackbar_error_text,
   },
-})
+});

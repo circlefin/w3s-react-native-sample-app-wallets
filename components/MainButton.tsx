@@ -16,43 +16,36 @@
  * limitations under the License.
  */
 
-import type { TouchableOpacityProps } from "react-native"
-import { Text, TouchableOpacity } from "react-native"
-import { commonStyles } from "../styles"
-import * as React from "react"
+import type { TouchableOpacityProps } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
+import { commonStyles } from "../styles";
+import * as React from "react";
 
 export const MainButton = (props: MainButtonProps) => {
-  let normalBg = commonStyles.mainButton
-  let disabledBg = commonStyles.disabledMainButton
-  let normalText = commonStyles.mainButtonText
-  let disabledText = commonStyles.disabledMainButtonText
-  
+  let normalBg = commonStyles.mainButton;
+  let disabledBg = commonStyles.disabledMainButton;
+  let normalText = commonStyles.mainButtonText;
+  let disabledText = commonStyles.disabledMainButtonText;
+
   if (props.isSecondary) {
-    normalBg = commonStyles.secondaryButton
-    disabledBg = commonStyles.disabledSecondaryButton
-    normalText = commonStyles.secondaryButtonText
-    disabledText = commonStyles.disabledSecondaryButtonText
+    normalBg = commonStyles.secondaryButton;
+    disabledBg = commonStyles.disabledSecondaryButton;
+    normalText = commonStyles.secondaryButtonText;
+    disabledText = commonStyles.disabledSecondaryButtonText;
   }
-  
+
   return (
     <TouchableOpacity
       {...props}
       activeOpacity={0.7}
-      style={[
-        normalBg,
-        props.disabled && disabledBg,
-        props.style
-      ]}>
-      <Text
-        style={[
-          normalText,
-          props.disabled && disabledText
-        ]}>
+      style={[normalBg, props.disabled && disabledBg, props.style]}
+    >
+      <Text style={[normalText, props.disabled && disabledText]}>
         {props.text}
       </Text>
     </TouchableOpacity>
-  )
-}
+  );
+};
 
 interface MainButtonProps extends TouchableOpacityProps {
   disabled: boolean;

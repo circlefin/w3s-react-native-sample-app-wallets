@@ -16,43 +16,41 @@
  * limitations under the License.
  */
 
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { pw_app_id, pw_endpoint } from '../../src/config.json'
-import type { RootState } from '@redux/store'
-import type { SettingsState } from '@redux/types'
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { pw_app_id, pw_endpoint } from "../../src/config.json";
+import type { RootState } from "@redux/store";
+import type { SettingsState } from "@redux/types";
 
 // Define the initial state using that type
 const initialState: SettingsState = {
   endpoint: pw_endpoint,
   appId: pw_app_id,
-  enableBiometrics: false
-}
+  enableBiometrics: false,
+};
 
 export const settingsSlice = createSlice({
-  name: 'settings',
+  name: "settings",
   initialState,
   reducers: {
     setEndpoint: (state, action: PayloadAction<string>) => {
-      state.endpoint = action.payload
+      state.endpoint = action.payload;
     },
     setAppId: (state, action: PayloadAction<string>) => {
-      state.appId = action.payload
+      state.appId = action.payload;
     },
     setEnableBiometrics: (state, action: PayloadAction<boolean>) => {
-      state.enableBiometrics = action.payload
+      state.enableBiometrics = action.payload;
     },
   },
-})
+});
 
-export const { 
-  setEndpoint, 
-  setAppId, 
-  setEnableBiometrics
-} = settingsSlice.actions
+export const { setEndpoint, setAppId, setEnableBiometrics } =
+  settingsSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
-export const selectEndpoint = (state: RootState) => state.settings.endpoint
-export const selectAppId = (state: RootState) => state.settings.appId
-export const selectEnableBiometrics = (state: RootState) => state.settings.enableBiometrics
+export const selectEndpoint = (state: RootState) => state.settings.endpoint;
+export const selectAppId = (state: RootState) => state.settings.appId;
+export const selectEnableBiometrics = (state: RootState) =>
+  state.settings.enableBiometrics;
 
-export default settingsSlice.reducer
+export default settingsSlice.reducer;

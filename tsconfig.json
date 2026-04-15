@@ -4,21 +4,10 @@
     "strict": true,
     "jsx": "react-native",
     "paths": {
-      "@/*": [
-        "./*"
-      ],
-      "@features/*": [
-        "./features/*"
-      ],
-      "@redux/*": [
-        "./redux/*"
-      ]
+      "@/*": ["./*"],
+      "@features/*": ["./features/*"],
+      "@redux/*": ["./redux/*"]
     }
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    ".expo/types/**/*.ts",
-    "expo-env.d.ts"
-  ]
+  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.ts", "expo-env.d.ts"]
 }

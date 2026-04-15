@@ -7,13 +7,16 @@ This sample app supports three authentication methods:
 <img src="readme_images/running_app_pin.png" alt="PIN Authentication" width="200"/>&nbsp;&nbsp;<img src="readme_images/running_app_email.png" alt="Email OTP Authentication" width="200"/>&nbsp;&nbsp;<img src="readme_images/running_app_social.png" alt="Social Login Authentication" width="200"/>
 
 ### 1. PIN Code (Recommended for quick start)
+
 - **Simplest setup** - Only requires Circle App ID
 
 ### 2. Email OTP
+
 - **Backend configuration** - Requires email service setup on Circle developer console
 - No additional client-side configuration needed
 
 ### 3. Social Login (Google, Facebook, Apple)
+
 - **Advanced setup** - Requires OAuth provider accounts and platform-specific configuration
 - Additional setup for iOS and Android
 
@@ -33,22 +36,25 @@ This sample app supports three authentication methods:
 ## Requirements
 
 ### Development Environment
+
 - Node.js 20.19.4 or higher
 - npm
 - Expo CLI
 
 ### Android
+
 - Java 17 (JDK 17 recommended)
 - Android Studio and Android SDK
-- Android SDK Platform 35 (Android 15 VanillaIceCream)
+- Android SDK Platform 36 (Android 16 Baklava)
 - Android SDK Build-Tools 36.0.0
-- Android device or emulator (API level 35+)
+- Android device or emulator (API level 36+)
 
 ### iOS
-- macOS with Xcode 16.1+ (Xcode 26 is recommended)
+
+- macOS with Xcode 16.3+ (Xcode 26 is recommended)
 - Xcode Command Line Tools
 - CocoaPods
-- iOS device (iOS 15.0+) or Simulator
+- iOS device (iOS 15.1+) or Simulator
 - Apple Developer account (for physical device testing)
 
 ---
@@ -56,6 +62,7 @@ This sample app supports three authentication methods:
 ## Quick Start (PIN Mode)
 
 ### Prerequisites
+
 1. **Circle Developer Console Account** - [Sign up here](https://console.circle.com)
 2. **App ID** - Get from [Circle Developer Console](https://console.circle.com/wallets/user/configurator) → Wallets → User Controlled → Configurator
 3. **GitHub PAT** (Android only) - [Create token](https://github.com/settings/tokens) with `read:packages` permission
@@ -95,11 +102,13 @@ npx expo prebuild
 **Step 5: Run the app**
 
 For iOS:
+
 ```bash
 npm run ios
 ```
 
 For Android:
+
 ```bash
 npm run android
 ```
@@ -123,6 +132,7 @@ Email OTP authentication requires an SMTP email service configured on your backe
 Follow [our tutorial](https://developers.circle.com/wallets/user-controlled/create-user-wallets-with-email#step-1-get-mailtrap-smtp-credentials) to configure your SMTP credentials. The tutorial uses [Mailtrap](https://mailtrap.io/) for testing.
 
 The tutorial covers:
+
 - **Step 1:** Getting SMTP credentials from your email provider
 - **Step 2:** Configuring SMTP settings in Circle Developer Console
 
@@ -146,6 +156,7 @@ Before configuring your app, you need to obtain IDs from each social provider.
 <summary><b>Google</b></summary>
 
 **What you need:**
+
 - Web Client ID
 - `google-services.json` file from Firebase (for Android)
 - iOS Client ID (extracted from `GoogleService-Info.plist`)
@@ -159,9 +170,9 @@ Before configuring your app, you need to obtain IDs from each social provider.
    - Click "Add app" → Select Android
    - Package name: `com.circle.w3s.rn.sample.wallet`
    - Download the `google-services.json` file
-   
-   For detailed Android setup steps, see [Firebase Android setup guide](https://firebase.google.com/docs/android/setup#create-firebase-project)  
-  
+
+   For detailed Android setup steps, see [Firebase Android setup guide](https://firebase.google.com/docs/android/setup#create-firebase-project)
+
 3. Add an **iOS app** to your project:
    - Go to Project Settings → Your apps
    - Click "Add app" → Select iOS
@@ -178,6 +189,7 @@ Before configuring your app, you need to obtain IDs from each social provider.
    - In the **Web SDK configuration** panel, copy the **Web client ID**
 
 **Save these values:**
+
 ```
 ✓ Web Client ID: xxxxx.apps.googleusercontent.com
 ✓ google-services.json: Downloaded
@@ -190,6 +202,7 @@ Before configuring your app, you need to obtain IDs from each social provider.
 <summary><b>Facebook</b></summary>
 
 **What you need:**
+
 - Facebook App ID
 - Facebook Client Token
 - Facebook Display Name
@@ -205,6 +218,7 @@ Before configuring your app, you need to obtain IDs from each social provider.
    - **Facebook Display Name** (your app name)
 
 **Save these values:**
+
 ```
 ✓ Facebook App ID: xxxxxxxxxxxx
 ✓ Facebook Client Token: xxxxxxxxxxxxxxxx
@@ -217,6 +231,7 @@ Before configuring your app, you need to obtain IDs from each social provider.
 <summary><b>Apple</b></summary>
 
 **What you need:**
+
 - Service ID (for Sign in with Apple on Android)
 
 **Steps:**
@@ -225,6 +240,7 @@ Before configuring your app, you need to obtain IDs from each social provider.
 2. Note down your **Service ID**
 
 **Save this value:**
+
 ```
 ✓ Apple Service ID: com.yourcompany.yourapp
 ```
@@ -311,6 +327,7 @@ Edit `prebuild-sync-src/android/app/src/main/res/values/strings.xml`:
 ```
 
 Replace:
+
 - `YOUR_FACEBOOK_APP_ID` with your Facebook App ID
 - `YOUR_FACEBOOK_CLIENT_TOKEN` with your Facebook Client Token
 
@@ -340,6 +357,7 @@ Replace `YOUR_APPLE_SERVICE_ID` with your Apple Service ID (e.g., `com.yourcompa
 If you encounter build or Metro bundler errors:
 
 1. **Clean install and rebuild:**
+
    ```sh
    rm -rf node_modules package-lock.json android ios .expo
    npm install
@@ -347,6 +365,7 @@ If you encounter build or Metro bundler errors:
    ```
 
 2. **Clear Metro bundler cache:**
+
    ```sh
    npx expo start --clear
    ```

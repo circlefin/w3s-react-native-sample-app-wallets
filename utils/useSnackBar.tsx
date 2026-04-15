@@ -16,24 +16,24 @@
  * limitations under the License.
  */
 
-import { useState } from 'react'
+import { useState } from "react";
 
 export type ShowSnackBarFn = (msg: string, isSuccess?: boolean) => void;
 
 export const useSnackBar = () => {
-  const [visible, setVisible] = useState(false)
-  const [message, setMessage] = useState('')
-  const [isSuccess, setIsSuccess] = useState(true)
+  const [visible, setVisible] = useState(false);
+  const [message, setMessage] = useState("");
+  const [isSuccess, setIsSuccess] = useState(true);
 
   const showSnackBar = (msg: string, success: boolean = true) => {
-    setMessage(msg)
-    setIsSuccess(success)
-    setVisible(true)
-  }
+    setMessage(msg);
+    setIsSuccess(success);
+    setVisible(true);
+  };
 
   const hideSnackBar = () => {
-    setVisible(false)
-  }
+    setVisible(false);
+  };
 
   return {
     visible,
@@ -41,5 +41,5 @@ export const useSnackBar = () => {
     isSuccess,
     showSnackBar,
     hideSnackBar,
-  }
-}
+  };
+};

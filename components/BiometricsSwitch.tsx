@@ -16,25 +16,31 @@
  * limitations under the License.
  */
 
-import { Image, StyleSheet, Switch, SwitchProps, Text, View } from "react-native"
-import { colors } from "../styles"
-import * as React from "react"
-import { t } from "../utils/i18n"
+import {
+  Image,
+  StyleSheet,
+  Switch,
+  SwitchProps,
+  Text,
+  View,
+} from "react-native";
+import { colors } from "../styles";
+import * as React from "react";
+import { t } from "../utils/i18n";
 
 export const BiometricsSwitchButton = (props: BiometricsSwitchProps) => {
   return (
     <View style={[styles.normalBg, props.style]}>
-      <Image source={require("../assets/image/ic_biometrics.png")} style={{ marginRight: 8, width: 48, height: 48 }} />
-      
+      <Image
+        source={require("../assets/image/ic_biometrics.png")}
+        style={{ marginRight: 8, width: 48, height: 48 }}
+      />
+
       <View style={{ flexShrink: 1 }}>
-        <Text style={styles.mainText}>
-          {t('biometrics_switch_title')}
-        </Text>
-        <Text style={styles.subText}>
-          {t('biometrics_switch_desc')}
-        </Text>
+        <Text style={styles.mainText}>{t("biometrics_switch_title")}</Text>
+        <Text style={styles.subText}>{t("biometrics_switch_desc")}</Text>
       </View>
-      
+
       <Switch
         accessibilityLabel={props.accessibilityLabel}
         trackColor={{ false: "#767577", true: "#81b0ff" }}
@@ -44,8 +50,8 @@ export const BiometricsSwitchButton = (props: BiometricsSwitchProps) => {
         value={props.value}
       />
     </View>
-  )
-}
+  );
+};
 
 interface BiometricsSwitchProps extends SwitchProps {
   accessibilityLabel: string;
@@ -55,8 +61,8 @@ interface BiometricsSwitchProps extends SwitchProps {
 const styles = StyleSheet.create({
   normalBg: {
     marginTop: 16,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
+    flexDirection: "row",
+    justifyContent: "space-between",
   },
   mainText: {
     color: colors.social_login_text,
@@ -68,4 +74,4 @@ const styles = StyleSheet.create({
     fontWeight: "400",
     fontSize: 14,
   },
-})
+});
